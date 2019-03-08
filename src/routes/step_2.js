@@ -3,18 +3,17 @@ import {Router} from 'aurelia-router';
 
 @inject(Router)
 
-export class Step_1 {
+export class Step_2 {
 	
 	constructor(Router) {
 		this.router = Router;
-		this.consent_checked = false;
 	}
 
 	attached() {
-		console.log(this.router)
+
 	}
 
 	next() {
-		this.router.navigateToRoute('step_2', { from: 'step_1' } );
+		this.router.navigateToRoute('step_3', { from: 'step_2' } );
 	}
 }

@@ -11,15 +11,15 @@ export class App {
   }
 
   configureRouter(config, router) {
-	  
+		this.router = router;
+		
 	  config.title = 'Evaluation';
 
 	  config.map([
-	    { route: ['', 'step_1'],       name: 'step_1',       moduleId: PLATFORM.moduleName( 'routes/step_1') }
-	    //{ route: 'step_2',       name: 'step_1',       moduleId: 'routes/step_2' },
-	    //{ route: 'step_3',       name: 'step_3',       moduleId: 'routes/step_3' }
+			{ route: ['', 'step_1'],       name: 'step_1',       moduleId: PLATFORM.moduleName( './routes/step_1'), nav: true },
+			{ route: 'step_2',             name: 'step_2',       moduleId: PLATFORM.moduleName( './routes/step_2'), nav: true }
 	  ]);
 
-	  this.router = router;
+	  
 	}
 }
