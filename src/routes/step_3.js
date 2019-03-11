@@ -15,19 +15,44 @@ export class Step_3 {
 
 	attached() {
 
-    this.metrics = [];
+    this.data = [];
 
-    this.metrics.push({ id: 1, name: 'Metric-1', value: 20 });
-    this.metrics.push({ id: 2, name: 'Metric-2', value: 40 });
-    this.metrics.push({ id: 3, name: 'Metric-3', value: 50 });
+    this.data.push({ id: 1, name: 'Metric-1', value: 20 });
+    this.data.push({ id: 2, name: 'Metric-2', value: 40 });
+    this.data.push({ id: 3, name: 'Metric-3', value: 50 });
+
     
+    this.reset();
 
     //http://ionden.com/a/plugins/ion.rangeSlider/api.html
 
     //this.taskQueue.queueMicroTask(() => {            
     //  $(".js-range-slider").ionRangeSlider();       
     //});
-	}
+  }
+  
+  remove(event) {
+
+    let id = event.detail;
+
+    let index = this.metrics.findIndex( (el) => {
+      return el.id === id;
+    });
+  
+    this.metrics.splice(index, 1);
+  }
+
+  add() {
+
+  }
+
+  reset() {
+    this.metrics = [];
+
+    for( let item of this.data ) {
+      this.metrics.push( JSON.parse( JSON.stringify(item) ) );
+    }
+  }
 
 	next(which) {
 

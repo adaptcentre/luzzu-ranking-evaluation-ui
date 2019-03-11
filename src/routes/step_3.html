@@ -16,8 +16,19 @@
     <!-- Metrics -->
     <div class="row" repeat.for="metric of metrics">
       <require from="../resources/elements/metric"></require>
-      <metric metric.bind="metric"></metric>
+      <metric metric.bind="metric" remove-metric.delegate="remove($event)"></metric>
     </div>
+  
+    <!-- Buttons -->
+    <div class="row">
+      <div class="col-4 pl-0">
+        <button type="button" class="btn btn-warning btn-lg btn-block" click.delegate="reset()"> reset </button>
+      </div>
+      <div class="col-4 offset-4 pr-0">
+          <button type="button" class="btn btn-success btn-lg btn-block"> next </button>
+      </div>
+    </div>
+
   </div>
 
 </template>
