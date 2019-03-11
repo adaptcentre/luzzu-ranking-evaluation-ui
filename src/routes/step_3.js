@@ -21,9 +21,12 @@ export class Step_3 {
     this.metrics.push({ id: 2, name: 'Metric-2', value: 40 });
     this.metrics.push({ id: 3, name: 'Metric-3', value: 50 });
     
-    this.taskQueue.queueMicroTask(() => {            
-      $(".js-range-slider").ionRangeSlider();       
-    });
+
+    //http://ionden.com/a/plugins/ion.rangeSlider/api.html
+
+    //this.taskQueue.queueMicroTask(() => {            
+    //  $(".js-range-slider").ionRangeSlider();       
+    //});
 	}
 
 	next(which) {
