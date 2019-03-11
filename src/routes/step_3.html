@@ -6,7 +6,7 @@
         <p> Lorem ipsum dolor, sit amet consectetur adipisicing elit. Beatae sint earum possimus commodi aut quaerat fuga, nostrum asperiores iste quia atque quod officiis, incidunt repellat culpa libero aperiam neque sequi!</p>
       </div>
     </div>
-
+    
     <div class="row">
       <div class="col-12">
         <p> Lorem ipsum dolor, sit amet consectetur adipisicing elit. Beatae sint earum possimus commodi aut quaerat fuga, nostrum asperiores iste quia atque quod officiis, incidunt repellat culpa libero aperiam neque sequi!</p>
@@ -16,25 +16,38 @@
     <!-- Metrics -->
     <div class="row">
       <div class="col-12">
-        <div class="row mt-2" repeat.for="metric of metrics">
+        <div class="row mt-2 border border-dark rounded" repeat.for="metric of metrics">
 
-          <!-- Name -->
-          <div class="col-2">
-            <p>
-              <label for="">${metric.name}</label>
-            </p>
+          <!-- XXXXXXXXX -->
+          <div class="col-12">
+            <div class="row bg-light rounded pt-2">
+              <div class="col-10">
+                  <h3>
+                    ${metric.name}
+                  </h3>
+                </div>
+                <div class="col-2">
+                  <h3 class="text-right"><i class="fas fa-times"></i></h3>
+                </div>
+            </div>
+          </div>
+          
+
+          <!-- XXXXXXXXX -->
+          <div class="col-6 pt-2">
+            <div class="row">
+              <div class="col-2 text-center"><i class="fas fa-thumbs-down fa-2x"></i></div>
+              <div class="col-8">
+                <input type="text" class="js-range-slider" name="my_range" value="" />
+              </div>
+              <div class="col-2 text-center"><i class="fas fa-thumbs-up fa-2x"></i> </div>
+            </div>
           </div>
 
-          <div class="col-4">
-
-            <div class="row">
-              <div class="col-2 text-center"><i class="fas fa-thumbs-down"></i></div>
-              <div class="col-8"><input type="range" min="0" max="100" class="form-control-range" id=""> </div>
-              <div class="col-2 text-center"><i class="fas fa-thumbs-up"></i> </div>
-            </div>
-
-              
-            
+          <div class="col-6">
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum optio consectetur itaque exercitationem nisi commodi, molestias deleniti expedita doloremque ea tempore modi quidem magnam. Necessitatibus impedit veritatis ipsa architecto distinctio.
+            </p>
           </div>
 
         </div>

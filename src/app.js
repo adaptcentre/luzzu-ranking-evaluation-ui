@@ -2,11 +2,7 @@ import {PLATFORM} from 'aurelia-pal';
 
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-//import '@fortawesome/fontawesome-free';
-
 import '@fortawesome/fontawesome-free/js/all'
-
 import 'app.css';
 
 export class App {
