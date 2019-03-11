@@ -3,3 +3,14 @@
 * {
   font-family: 'Roboto', sans-serif;
 }
+
+.task-selection {
+  transition: all 0.5s;
+  border: 1px solid #6e757c;
+}
+
+.task-selection:hover {
+  background-color: white !important;
+  color: #212428 !important;
+  cursor: pointer;
+}
