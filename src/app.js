@@ -2,6 +2,11 @@ import {PLATFORM} from 'aurelia-pal';
 
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+//import '@fortawesome/fontawesome-free';
+
+import '@fortawesome/fontawesome-free/js/all'
+
 import 'app.css';
 
 export class App {
@@ -17,7 +22,8 @@ export class App {
 
 	  config.map([
 			{ route: ['', 'step_1'],       name: 'step_1',       moduleId: PLATFORM.moduleName( './routes/step_1'), nav: true },
-			{ route: 'step_2',             name: 'step_2',       moduleId: PLATFORM.moduleName( './routes/step_2'), nav: true }
+			{ route: 'step_2',             name: 'step_2',       moduleId: PLATFORM.moduleName( './routes/step_2'), nav: true },
+			{ route: 'step_3',             name: 'step_3',       moduleId: PLATFORM.moduleName( './routes/step_3'), nav: true },
 	  ]);
 
 	  

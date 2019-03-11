@@ -14,3 +14,11 @@
   color: #212428 !important;
   cursor: pointer;
 }
+
+.w-10 {
+  width: 10% !important;
+}
+
+.w-80 {
+  width: 80% !important;
+}
