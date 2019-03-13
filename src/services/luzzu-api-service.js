@@ -8,7 +8,16 @@ import { HttpClient } from 'aurelia-fetch-client';
 inject(HttpClient)
 
 export default class ApiHelper {
+  
   constructor(HttpClient) {
     this.httpClient = HttpClient;
+
+    this.httpClient.configure( config => {
+      config
+        .useStandardConfiguration()
+        .withBaseUrl('http://luzzu.adaptcentre.ie/framework-apis/v4/')
+    });
   }
+
+
 }
