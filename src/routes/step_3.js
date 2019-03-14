@@ -21,6 +21,7 @@ export class Step_3 {
     }
     this.loading = true;
     this.ranking = []; // should get populated in activate hook
+    this.metrics = [];
   }
   
   activate() {
@@ -43,7 +44,7 @@ export class Step_3 {
       this.luzzuApiService.getMetrics()
       .then( (metricData) => {
       
-        this.dataStore.setMetricData( metricData );
+        this.dataStore.setMetrics( metricData );
         resolve();
       });
     });
@@ -67,14 +68,32 @@ export class Step_3 {
     this.ranking.splice(index, 1);
   }
 
-  add() {
-    $('#addMetricModal').modal({
-
-    });
+  openModal() {
+    $('#addMetricModal').modal({});
   }
 
   reset() {
     this.ranking = this.dataStore.getRanking();
+    this.metrics = this.filterMetrics( this.dataStore.getMetrics() );
+
+    console.log(this.metrics)
+  }
+
+  // need this so we cannot add the same ones twice
+  filterMetrics( metrics ) {
+
+    return metrics.filter( (el) => {
+      
+      let found = this.ranking.findIndex( (elm) => {
+        return el.id === elm.id;
+      });
+
+      if(found === -1) {
+        return true;
+      }
+      
+      return false;
+    });
   }
 
 	next() {

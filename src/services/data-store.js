@@ -5,7 +5,7 @@ export default class DataStore {
   constructor() {
     this.ranking = [];
     this.results = [];
-    this.metricData = [];
+    this.metrics= [];
   }
 
   setRanking( ranking ) {
@@ -24,11 +24,20 @@ export default class DataStore {
     return JSON.parse( JSON.stringify( this.results ) );
   }
 
-  setMetricData(metricData) {
-    this.metricData = metricData;
+  setMetrics(metricData) {
+    this.metrics = metricData;
   }
 
-  getMetricData() {
-    return JSON.parse( JSON.stringify( this.metricData ) );
+  getMetrics() {
+    return JSON.parse( JSON.stringify( this.metrics ) );
+  }
+
+  getMetricDesc( id ) {
+    let res = this.metrics.findIndex( (el) => { return el.id === id; } );
+
+    if(res !== -1) {
+      return this.metrics[res].desc;
+    }
+
   }
 }
