@@ -1,34 +1,41 @@
 import {inject, TaskQueue} from 'aurelia-framework';
 import {Router} from 'aurelia-router';
+import LuzzuApiService from '../services/luzzu-api-service.js';
 
-import 'ion-rangeslider/css/ion.rangeslider.min.css';
-import 'ion-rangeslider';
-
-@inject(Router, TaskQueue)
+@inject(Router, TaskQueue, LuzzuApiService)
 
 export class Step_3 {
 	
-	constructor(Router, TaskQueue) {
+	constructor(Router, TaskQueue, LuzzuApiService) {
     this.router = Router;
-    this.taskQueue = TaskQueue
-	}
+    this.taskQueue = TaskQueue;
+    this.luzzuApiService = LuzzuApiService;
+
+    this.data = []; // should get populated in actived hook
+  }
+  
+  activate() {
+    /* 
+      Here we need to make some api calls to get the ranking data
+      and to get al list of all possible dimensions a user can add
+    */
+
+    return new Promise( (resolve, reject) => {
+
+      this.luzzuApiService.getRankingData()
+        .then( (rankingData) => {
+          
+          this.data = rankingData;
+          resolve();
+        })
+
+    });
+  }
 
 	attached() {
 
-    this.data = [];
-
-    this.data.push({ id: 1, name: 'Metric-1', value: 20 });
-    this.data.push({ id: 2, name: 'Metric-2', value: 40 });
-    this.data.push({ id: 3, name: 'Metric-3', value: 50 });
-
-    
     this.reset();
 
-    //http://ionden.com/a/plugins/ion.rangeSlider/api.html
-
-    //this.taskQueue.queueMicroTask(() => {            
-    //  $(".js-range-slider").ionRangeSlider();       
-    //});
   }
   
   remove(event) {
@@ -54,15 +61,10 @@ export class Step_3 {
     }
   }
 
-	next(which) {
+	next() {
 
-		if(which === 1) {
-			this.router.navigateToRoute('step_4', { from: 'step_3', task: 1 } );
-		}
-
-		else if( which === 2 ) {
-			this.router.navigateToRoute('step_4', { from: 'step_3', task: 2 } );
-		}
-		
+    this.luzzuApiService.sendRankingData( this.metrics );
+    
+    //this.router.navigateToRoute('step_4', { from: 'step_3' } );
 	}
 }

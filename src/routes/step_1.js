@@ -15,6 +15,6 @@ export class Step_1 {
 	}
 
 	next() {
-		this.router.navigateToRoute('step_2', { from: 'step_1' } );
+		this.router.navigateToRoute('step_3', { from: 'step_1' } );
 	}
 }
