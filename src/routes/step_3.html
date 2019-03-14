@@ -2,7 +2,7 @@
 
   <!-- Modal -->
   <require from="../resources/elements/add-metric.html"></require>
-	<add-metric test.bind="test"></add-metric>
+	<add-metric metrics.bind="metrics"></add-metric>
 
   <!-- Loading Template -->
 	<require from="../resources/elements/loading.html"></require>
@@ -26,7 +26,7 @@
     <!-- Metrics -->
     <div class="row mt-3" repeat.for="metric of ranking">
       <require from="../resources/elements/metric"></require>
-      <metric metric.bind="metric" remove-metric.delegate="remove($event)"></metric>
+      <metric metric.bind="metric" remove-metric.delegate="removeMetricFromRanking($event)"></metric>
     </div>
 
     <div class="row pointer">

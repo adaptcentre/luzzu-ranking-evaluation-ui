@@ -57,7 +57,7 @@ export class Step_3 {
     this.reset();
   }
   
-  remove(event) {
+  removeMetricFromRanking(event) {
 
     let id = event.detail;
 
@@ -72,11 +72,13 @@ export class Step_3 {
     $('#addMetricModal').modal({});
   }
 
+  addMetricToRanking() {
+
+  }
+
   reset() {
     this.ranking = this.dataStore.getRanking();
     this.metrics = this.filterMetrics( this.dataStore.getMetrics() );
-
-    console.log(this.metrics)
   }
 
   // need this so we cannot add the same ones twice

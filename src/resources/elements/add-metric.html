@@ -1,4 +1,4 @@
-<template bindable="test">
+<template bindable="metrics">
   <div class="modal" id="addMetricModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
@@ -9,8 +9,16 @@
           </button>
         </div>
         <div class="modal-body">
-          <p>${test.text}</p>
-          <h1 click.delegate="test.cool()"> CLick me </h1>
+          
+          <div repeat.for="metric of metrics">
+            <div>
+              ${metric.name}
+            </div>
+            <div>
+                ${metric.desc}
+              </div>
+          </div>
+
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
