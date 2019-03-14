@@ -3,16 +3,17 @@
 export default class DataStore {
 
   constructor() {
-    this.metrics = [];
+    this.ranking = [];
     this.results = [];
+    this.metricData = [];
   }
 
-  setMetrics( metrics ) {
-    this.metrics = metrics;
+  setRanking( ranking ) {
+    this.ranking = ranking;
   }
 
-  getMetrics() {
-    return JSON.parse( JSON.stringify( this.metrics ) );
+  getRanking() {
+    return JSON.parse( JSON.stringify( this.ranking ) );
   }
 
   setResults( results ) {
@@ -21,5 +22,13 @@ export default class DataStore {
 
   getResults( results ) {
     return JSON.parse( JSON.stringify( this.results ) );
+  }
+
+  setMetricData(metricData) {
+    this.metricData = metricData;
+  }
+
+  getMetricData() {
+    return JSON.parse( JSON.stringify( this.metricData ) );
   }
 }

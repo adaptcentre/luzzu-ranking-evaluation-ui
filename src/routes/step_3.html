@@ -1,5 +1,9 @@
 <template>
 
+  <!-- Modal -->
+  <require from="../resources/elements/add-metric.html"></require>
+	<add-metric test.bind="test"></add-metric>
+
   <!-- Loading Template -->
 	<require from="../resources/elements/loading.html"></require>
 	<loading if.bind="loading"></loading>
@@ -20,14 +24,16 @@
     </div>
 
     <!-- Metrics -->
-    <div class="row mt-3" repeat.for="metric of metrics">
+    <div class="row mt-3" repeat.for="metric of ranking">
       <require from="../resources/elements/metric"></require>
       <metric metric.bind="metric" remove-metric.delegate="remove($event)"></metric>
     </div>
 
     <div class="row pointer">
       <div class="col-12 mt-3 border border-dark rounded pt-3 pb-2">
-        <h4 class="text-muted text-center"> Add Metric </h4>
+        <button role="button" class="btn btn-block" click.delegate="add()">
+          <h4 class="text-muted text-center"> Add Metric </h4>
+        </button>
       </div>
     </div>
   

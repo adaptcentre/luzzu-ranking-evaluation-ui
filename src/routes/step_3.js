@@ -13,8 +13,14 @@ export class Step_3 {
     this.luzzuApiService = LuzzuApiService;
     this.dataStore = DataStore;
     
+    this.test = {
+      text: "helllo",
+      cool: () => {
+        console.log(this.loading)
+      }
+    }
     this.loading = true;
-    this.metrics = []; // should get populated in activate hook
+    this.ranking = []; // should get populated in activate hook
   }
   
   activate() {
@@ -23,16 +29,26 @@ export class Step_3 {
       and to get al list of all possible dimensions a user can add
     */
 
-    return new Promise( (resolve, reject) => {
+    let p1 = new Promise( (resolve, reject) => {
 
       this.luzzuApiService.getRankingData()
         .then( (rankingData) => {
       
-          this.dataStore.setMetrics( rankingData );
+          this.dataStore.setRanking( rankingData );
           resolve();
-        })
-
+        });
     });
+
+    let p2 = new Promise( (resolve, reject) => {
+      this.luzzuApiService.getMetrics()
+      .then( (metricData) => {
+      
+        this.dataStore.setMetricData( metricData );
+        resolve();
+      });
+    });
+
+    return Promise.all([p1,p2]);
   }
 
 	attached() {
@@ -44,25 +60,27 @@ export class Step_3 {
 
     let id = event.detail;
 
-    let index = this.metrics.findIndex( (el) => {
+    let index = this.ranking.findIndex( (el) => {
       return el.id === id;
     });
   
-    this.metrics.splice(index, 1);
+    this.ranking.splice(index, 1);
   }
 
   add() {
+    $('#addMetricModal').modal({
 
+    });
   }
 
   reset() {
-    this.metrics = this.dataStore.getMetrics();
+    this.ranking = this.dataStore.getRanking();
   }
 
 	next() {
     this.loading = true;
     
-    this.luzzuApiService.sendRankingData( this.metrics )
+    this.luzzuApiService.sendRankingData( this.ranking )
       .then( (results) => {
         this.dataStore.setResults( results );
         this.router.navigateToRoute('step_4', { from: 'step_3' } );
