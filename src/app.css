@@ -4,6 +4,10 @@
   font-family: 'Roboto', sans-serif;
 }
 
+.fitScreenY {
+  min-height: 100vh;
+}
+
 .task-selection {
   transition: all 0.5s;
   border: 1px solid #6e757c;

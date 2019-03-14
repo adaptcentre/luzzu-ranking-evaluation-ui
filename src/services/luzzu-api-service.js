@@ -28,20 +28,32 @@ export default class LuzzuApiService {
       { id: 2, name: 'Trustworthiness',  value: 0, apiValue: '44.74' }
     ]
 
+    console.log('Getting ranking data from API');
+
     return new Promise( (resolve, reject) => {
       
       setTimeout( () => {
 
         this.converter.convertIncomming( mockData );
 
-        console.table(mockData);
+        console.table( JSON.parse( JSON.stringify(mockData) ) );
 
         resolve( mockData );
       }, getRandomArbitrary( 500, 2000) );
-    })
+    });
   }
 
   sendRankingData( data ) {
+
+    let results = [
+      { desc: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Beatae sint earum possimus commodi aut quaerat fuga, nostrum asperiores iste quia atque quod officiis, incidunt repellat culpa libero aperiam neque sequi' },
+      { desc: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Beatae sint earum possimus commodi aut quaerat fuga, nostrum asperiores iste quia atque quod officiis, incidunt repellat culpa libero aperiam neque sequi' },
+      { desc: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Beatae sint earum possimus commodi aut quaerat fuga, nostrum asperiores iste quia atque quod officiis, incidunt repellat culpa libero aperiam neque sequi' },
+      { desc: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Beatae sint earum possimus commodi aut quaerat fuga, nostrum asperiores iste quia atque quod officiis, incidunt repellat culpa libero aperiam neque sequi' },
+      { desc: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Beatae sint earum possimus commodi aut quaerat fuga, nostrum asperiores iste quia atque quod officiis, incidunt repellat culpa libero aperiam neque sequi' },
+      { desc: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Beatae sint earum possimus commodi aut quaerat fuga, nostrum asperiores iste quia atque quod officiis, incidunt repellat culpa libero aperiam neque sequi' }
+    ];
+
 
     let mockData = data.map( (el) => {
       return { id: el.id, name: el.name, value: el.value }
@@ -49,7 +61,17 @@ export default class LuzzuApiService {
 
     this.converter.convertOutgoing( mockData );
     
-    console.table(mockData);
+    console.log('Sending ranking data to API');
+    console.table( JSON.parse( JSON.stringify(mockData) ) );
+
+    return new Promise( (resolve, reject) => {
+      
+      setTimeout( () => {
+        resolve( results );
+      }, getRandomArbitrary( 500, 2000) );
+    })
+
+    
   }
 
 

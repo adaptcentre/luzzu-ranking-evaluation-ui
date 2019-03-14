@@ -8,13 +8,15 @@ export class Step_1 {
 	constructor(Router) {
 		this.router = Router;
 		this.consent_checked = false;
+		this.loading = true;
 	}
 
 	attached() {
-		console.log(this.router)
+		this.loading = false;
 	}
 
 	next() {
+		this.loading = true;
 		this.router.navigateToRoute('step_3', { from: 'step_1' } );
 	}
 }

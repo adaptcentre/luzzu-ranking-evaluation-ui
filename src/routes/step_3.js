@@ -1,17 +1,20 @@
-import {inject, TaskQueue} from 'aurelia-framework';
-import {Router} from 'aurelia-router';
+import { inject } from 'aurelia-framework';
+import { Router } from 'aurelia-router';
+
+import DataStore from '../services/data-store.js';
 import LuzzuApiService from '../services/luzzu-api-service.js';
 
-@inject(Router, TaskQueue, LuzzuApiService)
+@inject(Router, LuzzuApiService, DataStore)
 
 export class Step_3 {
 	
-	constructor(Router, TaskQueue, LuzzuApiService) {
+	constructor(Router, LuzzuApiService, DataStore) {
     this.router = Router;
-    this.taskQueue = TaskQueue;
     this.luzzuApiService = LuzzuApiService;
-
-    this.data = []; // should get populated in actived hook
+    this.dataStore = DataStore;
+    
+    this.loading = true;
+    this.metrics = []; // should get populated in activate hook
   }
   
   activate() {
@@ -24,8 +27,8 @@ export class Step_3 {
 
       this.luzzuApiService.getRankingData()
         .then( (rankingData) => {
-          
-          this.data = rankingData;
+      
+          this.dataStore.setMetrics( rankingData );
           resolve();
         })
 
@@ -33,9 +36,8 @@ export class Step_3 {
   }
 
 	attached() {
-
+    this.loading = false;
     this.reset();
-
   }
   
   remove(event) {
@@ -54,17 +56,16 @@ export class Step_3 {
   }
 
   reset() {
-    this.metrics = [];
-
-    for( let item of this.data ) {
-      this.metrics.push( JSON.parse( JSON.stringify(item) ) );
-    }
+    this.metrics = this.dataStore.getMetrics();
   }
 
 	next() {
-
-    this.luzzuApiService.sendRankingData( this.metrics );
+    this.loading = true;
     
-    //this.router.navigateToRoute('step_4', { from: 'step_3' } );
+    this.luzzuApiService.sendRankingData( this.metrics )
+      .then( (results) => {
+        this.dataStore.setResults( results );
+        this.router.navigateToRoute('step_4', { from: 'step_3' } );
+      });
 	}
 }
