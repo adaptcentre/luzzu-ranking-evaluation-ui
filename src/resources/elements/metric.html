@@ -1,45 +1,53 @@
 <template>
-  <div class="col-12 border border-dark rounded">
 
-    <div class="row">
-      <div class="col-12">
-        <div class="row bg-light rounded pt-2">
-          <div class="col-10">
-            <h3>
-              ${metric.name}
-            </h3>
-          </div>
-          <div class="col-2">
-            <h3 class="text-right" click.delegate="remove()">
-              <i class="fas fa-times pointer"></i>
-            </h3>
-          </div>
+  <div class="col-12">
+
+    <div class="container border border-dark rounded">
+      
+      <!-- HEADER -->
+      <div class="row bg-light rounded pt-2">
+        <div class="col-10">
+          <h4>
+            ${metric.name}
+          </h4>
+        </div>
+        <div class="col-2">
+          <h3 class="text-right" click.delegate="remove()">
+            <i class="fas fa-times pointer"></i>
+          </h3>
         </div>
       </div>
-    </div>
-  
-    <div class="row">
-      <div class="col-6 pt-2">
-        <div class="row">
-          <div class="col-2 text-center mt-3"><i class="far fa-frown fa-2x"></i></div>
-          <div class="col-8 px-0">
-            <input type="text" class="js-range-slider" name="my_range" 
-              value="${metric.value}" 
-              data-min="0"
-              data-max="100" 
-              data-grid="true" 
-              data-hide-min-max="true"
-            />
+
+      <!-- BODY -->
+      <div class="row pt-3">
+        <div class="col-6">
+          <!-- Ranking slider -->
+          <div class="row">
+            <div class="col-2 pt-3 pr-0">
+              <i class="far fa-frown fa-2x"></i>
+            </div>
+            <div class="col-8 px-0">
+              <input type="text" class="js-range-slider" name="my_range" 
+                value="${metric.value}" 
+                data-min="0"
+                data-max="100" 
+                data-grid="true" 
+                data-hide-min-max="true"
+              />
+            </div>
+            <div class="col-2 pt-3 text-right pl-0">
+              <i class="far fa-smile fa-2x"></i>
+            </div>
           </div>
-          <div class="col-2 text-center mt-3"><i class="far fa-smile fa-2x"></i> </div>
+
+        </div>
+        <div class="col-6">
+            <p>
+              ${dataStore.getMetricDesc( metric.id )}
+            </p>
         </div>
       </div>
-  
-      <div class="col-6">
-        <p>
-          ${dataStore.getMetricDesc( metric.id )}
-        </p>
-      </div>
+
     </div>
 
   </div>    
