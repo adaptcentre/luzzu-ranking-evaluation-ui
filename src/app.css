@@ -19,14 +19,10 @@
   cursor: pointer;
 }
 
-.w-10 {
-  width: 10% !important;
-}
-
-.w-80 {
-  width: 80% !important;
-}
-
 .pointer {
   cursor: pointer;
+}
+
+.no-select {
+  user-select: none;
 }

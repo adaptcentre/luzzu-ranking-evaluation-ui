@@ -93,6 +93,14 @@ export class Step_3 {
     this.metrics = this.filterMetrics( this.dataStore.getMetrics() );
   }
 
+  debug() {
+    
+
+    this.luzzuApiService.sendRankingData( this.ranking )
+
+    //console.table( temp );
+  }
+
   // need this so we cannot add the same ones twice
   filterMetrics( metrics ) {
 
