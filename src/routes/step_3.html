@@ -1,15 +1,15 @@
 <template>
 
   <!-- Modal -->
-  <require from="../resources/elements/add-metric.html"></require>
-	<add-metric metrics.bind="metrics"></add-metric>
+  <require from="../resources/elements/add-metric"></require>
+	<add-metric metrics.one-way="metrics" add-metrics-to-ranking.delegate="addMetricToRanking($event)"></add-metric>
 
   <!-- Loading Template -->
 	<require from="../resources/elements/loading.html"></require>
 	<loading if.bind="loading"></loading>
 
 	<!-- Non Loading Template -->
-  <div else class="container mt-5">
+  <div else class="container my-5">
     <div class="row"> 
       <div class="col-12">
         <h1> Lorem ipsum dolor </h1>
@@ -40,10 +40,10 @@
     <!-- Buttons -->
     <div class="row mt-4">
       <div class="col-4 pl-0">
-        <button type="button" class="btn btn-warning btn-lg btn-block" click.delegate="reset()"> reset </button>
+        <button type="button" class="btn btn-secondary btn-lg btn-block" click.delegate="reset()"> Reset rankings </button>
       </div>
       <div class="col-4 offset-4 pr-0">
-          <button type="button" class="btn btn-success btn-lg btn-block" click.delegate="next()"> next </button>
+          <button type="button" class="btn btn-success btn-lg btn-block" click.delegate="next()"> Next </button>
       </div>
     </div>
 

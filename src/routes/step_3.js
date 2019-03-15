@@ -72,8 +72,20 @@ export class Step_3 {
     $('#addMetricModal').modal({});
   }
 
-  addMetricToRanking() {
+  addMetricToRanking(event) {
+    let metricsToAdd = event.detail;
+    
+    for(let metricId of metricsToAdd) {
+      let metric = {
+        name: metricId.name,
+        id: metricId.id,
+        value: 0
+      }
 
+      this.ranking.push(metric);
+    }
+
+    this.metrics = this.filterMetrics( this.dataStore.getMetrics() );
   }
 
   reset() {
