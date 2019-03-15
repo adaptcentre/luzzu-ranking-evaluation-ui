@@ -22,24 +22,13 @@
       <div class="row pt-3">
         <div class="col-6">
           <!-- Ranking slider -->
-          <div class="row">
-            <div class="col-2 pt-3 pr-0">
-              <i class="far fa-frown fa-2x"></i>
-            </div>
-            <div class="col-8 px-0">
-              <input type="text" class="js-range-slider" name="my_range" 
-                value="${metric.value}" 
-                data-min="0"
-                data-max="100" 
-                data-grid="true" 
-                data-hide-min-max="true"
-              />
-            </div>
-            <div class="col-2 pt-3 text-right pl-0">
-              <i class="far fa-smile fa-2x"></i>
-            </div>
-          </div>
-
+          <input type="text" class="js-range-slider" name="my_range" 
+            value="${metric.value}" 
+            data-min="0"
+            data-max="100" 
+            data-grid="true" 
+            data-hide-min-max="true"
+          />
         </div>
         <div class="col-6">
             <p class="font-weight-light">
