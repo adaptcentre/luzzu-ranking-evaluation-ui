@@ -28,7 +28,8 @@ export class Metric {
 
     el.ionRangeSlider({
       onFinish: (data) => {
-        console.log(data.from)
+        console.log( `Metric: ${this.metric.name} value changed from ${this.metric.value} to ${data.from}` );
+        this.metric.value = data.from;
       }
     });
 
