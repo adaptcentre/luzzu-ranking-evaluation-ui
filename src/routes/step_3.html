@@ -30,19 +30,21 @@
     </div>
 
     <div class="row pointer">
-      <div class="col-12 mt-3 border border-dark rounded pt-3 pb-2">
-        <button role="button" class="btn btn-block" click.delegate="openModal()">
-          <h4 class="text-muted text-center"> Add metric to ranking </h4>
-        </button>
+      <div class="col-12 mt-3">
+        <div class="border border-secondary rounded pt-3 pb-2">
+          <button role="button" class="btn btn-block" click.delegate="openModal()">
+            <h4 class="text-muted text-center"> Add metric to ranking </h4>
+          </button>
+        </div>
       </div>
     </div>
   
     <!-- Buttons -->
-    <div class="row mt-4">
-      <div class="col-4 pl-0">
+    <div class="row mt-5">
+      <div class="col-5">
         <button type="button" class="btn btn-secondary btn-lg btn-block" click.delegate="reset()"> Reset rankings </button>
       </div>
-      <div class="col-4 offset-4 pr-0">
+      <div class="col-5 offset-2">
           <button type="button" class="btn btn-success btn-lg btn-block" click.delegate="next()"> Next </button>
       </div>
     </div>
