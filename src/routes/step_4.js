@@ -1,18 +1,19 @@
 import {inject} from 'aurelia-framework';
 import {Router} from 'aurelia-router';
+import DataStore from '../services/data-store.js';
 
-@inject(Router)
+@inject(Router, DataStore)
 
 export class Step_4 {
 	
-	constructor(Router) {
+	constructor(Router, DataStore) {
 		this.router = Router;
 		this.loading = true;
+		this.dataStore = DataStore;
 	}
 
 	activate( params ) {
-		console.log(params);
-			
+		this.results = this.dataStore.getResults();
 	}
 
 	attached() {

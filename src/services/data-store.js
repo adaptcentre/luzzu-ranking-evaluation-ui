@@ -38,6 +38,5 @@ export default class DataStore {
     if(res !== -1) {
       return this.metrics[res].desc;
     }
-
   }
 }
