@@ -14,7 +14,7 @@ export class Step2Ranking {
         
     this.ranking = []; // should get populated in activate hook
   }
-  
+
   attached() {
     this.ranking = this.dataStore.getRanking();
   }

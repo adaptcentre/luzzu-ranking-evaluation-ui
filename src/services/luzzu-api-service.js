@@ -104,6 +104,20 @@ export default class LuzzuApiService {
     });
   }
 
+  getResults() {
+
+    let mockResults = [1,2,3,4,5];
+
+    console.log('Getting results from API');
+
+    return new Promise( (resolve, reject) => {
+      
+      setTimeout( () => {
+
+        resolve( mockResults );
+      }, getRandomArbitrary( 500, 2000) );
+    });
+  }
 
 }
 

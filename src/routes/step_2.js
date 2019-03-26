@@ -7,6 +7,9 @@ import LuzzuApiService from '../services/luzzu-api-service.js';
 
 @inject(LuzzuApiService, DataStore)
 
+// this.router.currentInstruction.fragment === 'ranking
+// ${router.currentInstruction.fragment === ''ranking ? 'active' : ''}
+
 export class Step_2 {
 	
 	constructor(LuzzuApiService, DataStore) {
@@ -21,7 +24,7 @@ export class Step_2 {
   		
 		config.map([
 			{ route: ['','ranking'],   name: 'ranking',  moduleId: PLATFORM.moduleName( 'routes/step_2-ranking') },
-			{ route: 'results',   name: 'results',  moduleId: PLATFORM.moduleName( 'routes/step_2-ranking') }
+			{ route: 'results',   name: 'results',  moduleId: PLATFORM.moduleName( 'routes/step_2-results') }
     ]);
     
     this.router = router;
@@ -31,6 +34,7 @@ export class Step_2 {
 
     // populate dataStore
 
+    // get ranking data
     let p1 = new Promise( (resolve, reject) => {
 
       this.luzzuApiService.getRankingData()
@@ -41,6 +45,7 @@ export class Step_2 {
         });
     });
 
+    // get metric data
     let p2 = new Promise( (resolve, reject) => {
       this.luzzuApiService.getMetrics()
       .then( (metricData) => {
@@ -50,11 +55,23 @@ export class Step_2 {
       });
     });
 
-    return Promise.all([p1,p2]);
+    // get result data
+    let p3 = new Promise( (resolve, reject) => {
+      this.luzzuApiService.getResults()
+      .then( (resultData) => {
+      
+        this.dataStore.setResults( resultData );
+        resolve();
+      });
+    });
+
+    return Promise.all([p1,p2,p3]);
   }
 
 	attached() {
     this.loading = false;
+
+    console.log(this.router)
   }
   
 	next() {

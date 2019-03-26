@@ -1,11 +1,16 @@
+import { inject } from 'aurelia-framework';
+import LuzzuApiService from '../services/luzzu-api-service.js';
 
+@inject(LuzzuApiService)
 
 export default class DataStore {
 
-  constructor() {
+  constructor(LuzzuApiService) {
     this.ranking = [];
     this.results = [];
     this.metrics= [];
+
+    this.luzzuApiService = LuzzuApiService;
   }
 
   setRanking( ranking ) {
@@ -20,7 +25,7 @@ export default class DataStore {
     this.results = results;
   }
 
-  getResults( results ) {
+  getResults() {
     return JSON.parse( JSON.stringify( this.results ) );
   }
 
