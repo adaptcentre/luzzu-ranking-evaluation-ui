@@ -1,28 +1,32 @@
 import { inject } from 'aurelia-framework';
-import { Router } from 'aurelia-router';
+import {PLATFORM} from 'aurelia-pal';
 
 import DataStore from '../services/data-store.js';
 import LuzzuApiService from '../services/luzzu-api-service.js';
 
-@inject(Router, LuzzuApiService, DataStore)
+@inject(LuzzuApiService, DataStore)
 
 export class Step_3 {
 	
-	constructor(Router, LuzzuApiService, DataStore) {
-    this.router = Router;
+	constructor(LuzzuApiService, DataStore) {
     this.luzzuApiService = LuzzuApiService;
     this.dataStore = DataStore;
     
-    this.test = {
-      text: "helllo",
-      cool: () => {
-        console.log(this.loading)
-      }
-    }
     this.loading = true;
     this.ranking = []; // should get populated in activate hook
     this.metrics = [];
   }
+
+  configureRouter(config, router, params) {
+  		
+		config.map([
+			{ route: ['','ranking'],   name: 'ranking',  moduleId: PLATFORM.moduleName( 'routes/step_3-ranking') },
+			{ route: 'results',   name: 'results',  moduleId: PLATFORM.moduleName( 'routes/step_3-results') }
+    ]);
+    
+    this.router = router;
+	}
+  
   
   activate() {
     /* 

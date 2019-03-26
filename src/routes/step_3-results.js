@@ -4,7 +4,7 @@ import DataStore from '../services/data-store.js';
 
 @inject(DataStore)
 
-export class Step2Results {
+export class Step3Results {
   
   constructor(DataStore) {
     this.dataStore = DataStore;

@@ -1,5 +1,4 @@
 import { inject } from 'aurelia-framework';
-//import { Router } from 'aurelia-router';
 import {PLATFORM} from 'aurelia-pal';
 
 import DataStore from '../services/data-store.js';
