@@ -17,6 +17,7 @@ export class Step_1 {
 
 	next() {
 		this.loading = true;
-		this.router.navigateToRoute('ranking');
+		//this.router.navigateToRoute('ranking');
+		this.router.navigate('step_2/ranking')
 	}
 }
