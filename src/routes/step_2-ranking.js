@@ -1,21 +1,14 @@
 import { inject } from 'aurelia-framework';
+import {Step_2} from './step_2.js';
 
-import DataStore from '../services/data-store.js';
-import LuzzuApiService from '../services/luzzu-api-service.js';
-
-@inject(LuzzuApiService, DataStore)
+@inject(Step_2)
 
 export class Step2Ranking {
   
-  constructor(LuzzuApiService, DataStore) {
-
-    this.luzzuApiService = LuzzuApiService;
-    this.dataStore = DataStore;
-        
-    this.ranking = []; // should get populated in activate hook
+  constructor(Step_2) {
+    this.parent = Step_2;
   }
 
   attached() {
-    this.ranking = this.dataStore.getRanking();
   }
 }

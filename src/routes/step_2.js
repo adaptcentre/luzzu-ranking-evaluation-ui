@@ -17,6 +17,9 @@ export class Step_2 {
     this.dataStore = DataStore;
     
     this.loading = true;
+
+    this.ranking = [];
+    this.results = [];
   }
 
   configureRouter(config, router, params) {
@@ -70,7 +73,8 @@ export class Step_2 {
 	attached() {
     this.loading = false;
 
-    console.log(this.router)
+    this.ranking = this.dataStore.getRanking();
+    this.results = this.dataStore.getResults();
   }
   
 	next() {
