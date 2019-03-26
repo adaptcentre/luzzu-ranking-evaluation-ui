@@ -1,38 +1,39 @@
 <template>
 
-  <div class="container my-5">
-    
-  
-    <div class="row">
+  <!-- Loading Template -->
+	<require from="../resources/elements/loading.html"></require>
+	<loading if.bind="loading"></loading>
+
+	<!-- Non Loading Template -->
+  <div else class="container my-5">
+    <div class="row"> 
       <div class="col-12">
-
-        <h2> 
-          Please select a task
-        </h2>
-
-        <!--
-        <select class="form-control form-control-lg">
-          <option> Option 1 </option>
-          <option> Option 2 </option>
-        </select>
-        -->
+        <h1> Task description </h1>
+        <p>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Beatae sint earum possimus commodi aut quaerat fuga, nostrum asperiores iste quia atque quod officiis, incidunt repellat culpa libero aperiam neque sequi! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Beatae sint earum possimus commodi aut quaerat fuga, nostrum asperiores iste quia atque quod officiis, incidunt repellat culpa libero aperiam neque sequi!
+        </p>
       </div>
     </div>
 
+    <!-- Metrics -->
+    <div class="row mt-3" repeat.for="metric of ranking">
+      <require from="../resources/elements/metric"></require>
+      <metric metric.bind="metric" readonly.one-way="true" remove-metric.delegate="removeMetricFromRanking($event)"></metric>
+    </div>
+
+    <!-- Buttons -->
     <div class="row mt-5">
-      <div class="col-4 offset-1">
-        <div class="bg-secondary px-3 py-3 rounded text-light task-selection" click.delegate="next(1)">
-          <h2>Task 1</h2>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos ea, mollitia minima iusto fuga molestiae temporibus dolorem officia. Architecto repellat autem numquam eligendi? Officiis nesciunt magnam, voluptatem maiores quo delectus.</p>
-        </div>
+      <div class="col-5">
+        <button type="button" class="btn btn-secondary btn-lg btn-block" click.delegate="reset()"> Reset rankings </button>
       </div>
-      <div class="col-4 offset-1">
-        <div class="bg-secondary px-3 py-3 rounded text-light task-selection" click.delegate="next(2)">
-            <h2>Task 2</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos ea, mollitia minima iusto fuga molestiae temporibus dolorem officia. Architecto repellat autem numquam eligendi? Officiis nesciunt magnam, voluptatem maiores quo delectus.</p>
-          </div>
+      <div class="col-2">
+          <button type="button" class="btn btn-warning btn-lg btn-block" click.delegate="debug()"> Debug </button>
+        </div>
+      <div class="col-5 ">
+          <button type="button" class="btn btn-success btn-lg btn-block" click.delegate="next()"> Next </button>
       </div>
     </div>
+
   </div>
-  
+
 </template>

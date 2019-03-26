@@ -10,6 +10,7 @@ import 'ion-rangeslider';
 
 export class Metric {
   @bindable metric;
+  @bindable readonly;
   
   constructor(Element, DataStore) {
     this.element = Element;
@@ -27,6 +28,7 @@ export class Metric {
     let el = $(this.element).find(".js-range-slider");
 
     el.ionRangeSlider({
+      disable: this.readonly,
       onFinish: (data) => {
         console.log( `Metric: ${this.metric.name} value changed from ${this.metric.value} to ${data.from}` );
         this.metric.value = data.from;
