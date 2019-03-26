@@ -1,4 +1,4 @@
-import {bindable, inject} from 'aurelia-framework';
+import {bindable, inject, containerless} from 'aurelia-framework';
 import DataStore from '../../services/data-store.js';
 
 //http://ionden.com/a/plugins/ion.rangeSlider/api.html
@@ -18,12 +18,12 @@ export class Metric {
   } 
 
   valueChanged(newValue, oldValue) {
-    console.log(newValue)
+    console.log(newValue);
   }
 
   attached() {
     //onFinish
-
+    console.log('metric component attached')
     // 1. Initialise range slider instance
     let el = $(this.element).find(".js-range-slider");
 
@@ -35,6 +35,14 @@ export class Metric {
       }
     });
 
+  }
+
+  getMetricDesc() {
+    console.log(this.metric)
+
+    let desc = this.dataStore.getMetricDesc( this.metric.id );
+    
+    return desc;
   }
 
   remove() {

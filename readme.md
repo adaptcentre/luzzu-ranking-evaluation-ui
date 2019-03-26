@@ -1,6 +1,6 @@
     
     
-----------------------------------------------
+
 AURELIA - CLI Settings:
 ```
     Platform: Web
@@ -13,10 +13,11 @@ AURELIA - CLI Settings:
     Integration Test Runner: None
     Editor: Visual Studio Code
     Features: None
+
+    Generated: 06.03.19
 ```
 
-Generated:
-    06.03.19
+
 ----------------------------------------------
 
 Start command - au run or au run --watch
