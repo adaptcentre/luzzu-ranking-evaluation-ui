@@ -1,0 +1,6 @@
+<template>
+  
+    <require from="../resources/elements/metric"></require>
+    <metric class="row mt-3" repeat.for="metric of ranking" metric.bind="metric" readonly.one-way="true"></metric>
+  
+</template>
