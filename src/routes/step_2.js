@@ -67,7 +67,9 @@ export class Step_2 {
       });
     });
 
-    return Promise.all([p1,p2,p3]);
+    let p4 = this.luzzuApiService.getResultsTest();
+
+    return Promise.all([p1,p2,p3,p4]);
   }
 
 	attached() {

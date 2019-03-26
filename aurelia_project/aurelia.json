@@ -1,5 +1,5 @@
 {
-  "name": "2019_Jeremy_Evaluation_UI",
+  "name": "luzzu_ranking_evaluation_ui",
   "type": "project:application",
   "bundler": {
     "id": "webpack",

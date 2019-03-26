@@ -1,5 +1,5 @@
 import { inject } from 'aurelia-framework';
-import { HttpClient } from 'aurelia-fetch-client';
+import { HttpClient, json } from 'aurelia-fetch-client';
 import RankingConverter from './ranking-converter.js';
 
 // might need to install polyfill for fetch
@@ -18,6 +18,13 @@ export default class LuzzuApiService {
       config
         .useStandardConfiguration()
         .withBaseUrl('http://luzzu.adaptcentre.ie/framework-apis/v4/')
+        .withDefaults({
+         // credentials: 'same-origin',
+          headers: {
+              'Accept': 'application/json',
+              'X-Requested-With': 'Fetch',
+          }
+      });
     });
   }
 
@@ -117,6 +124,46 @@ export default class LuzzuApiService {
         resolve( mockResults );
       }, getRandomArbitrary( 500, 2000) );
     });
+  }
+
+  getResultsTest() {
+    //http://luzzu.adaptcentre.ie/framework-apis/v4/lod-dataportal/rank/weighted/
+    let endpoint = 'lod-dataportal/rank/weighted/';
+
+    let mockPackage = {
+      "domain": "Government",
+      "weights": [
+        {
+          "type": "metric",
+          "uri": "http:\/\/purl.org\/eis\/vocab\/dqm#UndefinedClassesAndPropertiesMetric",
+          "weight": 0.5
+        },
+        {
+          "type": "metric",
+          "uri": "http:\/\/purl.org\/eis\/vocab\/dqm#CompatibleDatatype",
+          "weight": 0.3
+        },
+        {
+          "type": "metric",
+          "uri": "http:\/\/purl.org\/eis\/vocab\/dqm#UsageOfIncorrectDomainOrRangeDatatypesMetric",
+          "weight": 0.2
+        }
+      ]
+    }
+
+    return this.httpClient.fetch(endpoint, { 
+      method: 'post',
+      body: json(mockPackage) 
+    })
+      .then( (response) => {
+        return response.json();
+      })
+      .then( (data) => {
+        console.log(data)
+      })
+      .catch( (err) => {
+        console.log( err );
+      });
   }
 
 }
