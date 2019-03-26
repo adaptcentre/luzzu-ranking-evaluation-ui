@@ -38,8 +38,6 @@ export class Metric {
   }
 
   getMetricDesc() {
-    console.log(this.metric)
-
     let desc = this.dataStore.getMetricDesc( this.metric.id );
     
     return desc;
