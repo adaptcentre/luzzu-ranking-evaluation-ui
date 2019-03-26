@@ -13,8 +13,10 @@ export class Step_3 {
     this.dataStore = DataStore;
     
     this.loading = true;
+
     this.ranking = []; // should get populated in activate hook
     this.metrics = [];
+    this.results = [];
   }
 
   configureRouter(config, router, params) {
@@ -57,10 +59,21 @@ export class Step_3 {
   }
 
 	attached() {
-    this.loading = false;
     this.reset();
+    this.loading = false;
+    console.log('step 3 attached');
   }
   
+  openModal() {
+    $('#addMetricModal').modal({});
+  }
+
+  debug() {
+    this.luzzuApiService.sendRankingData( this.ranking )
+  }
+
+  //------
+
   removeMetricFromRanking(event) {
 
     let id = event.detail;
@@ -70,10 +83,6 @@ export class Step_3 {
     });
   
     this.ranking.splice(index, 1);
-  }
-
-  openModal() {
-    $('#addMetricModal').modal({});
   }
 
   addMetricToRanking(event) {
@@ -97,14 +106,6 @@ export class Step_3 {
     this.metrics = this.filterMetrics( this.dataStore.getMetrics() );
   }
 
-  debug() {
-    
-
-    this.luzzuApiService.sendRankingData( this.ranking )
-
-    //console.table( temp );
-  }
-
   // need this so we cannot add the same ones twice
   filterMetrics( metrics ) {
 
@@ -121,6 +122,8 @@ export class Step_3 {
       return false;
     });
   }
+
+  //------
 
 	next() {
     this.loading = true;

@@ -1,1 +1,16 @@
-<template></template>
+<template>
+  
+    <require from="../resources/elements/metric"></require>
+    <metric class="row mt-3" repeat.for="metric of parent.ranking" metric.bind="metric" readonly.one-way="false" remove-metric.delegate="parent.removeMetricFromRanking($event)"></metric>
+
+
+    <div class="row pointer">
+      <div class="col-12 mt-3">
+        <div class="border border-secondary rounded pt-3 pb-2">
+          <button role="button" class="btn btn-block" click.delegate="parent.openModal()">
+            <h4 class="text-muted text-center"> Add metric to ranking </h4>
+          </button>
+        </div>
+      </div>
+    </div>
+</template>
