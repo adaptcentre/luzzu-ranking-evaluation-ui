@@ -2,7 +2,7 @@
     
 ----------------------------------------------
 AURELIA - CLI Settings:
-    Name: 2019_Jeremy_Evaluation_UI
+```
     Platform: Web
     Bundler: Webpack
     Loader: None
@@ -13,6 +13,7 @@ AURELIA - CLI Settings:
     Integration Test Runner: None
     Editor: Visual Studio Code
     Features: None
+```
 
 Generated:
     06.03.19
