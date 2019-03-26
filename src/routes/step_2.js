@@ -77,7 +77,10 @@ export class Step_2 {
 	next() {
     this.loading = true;
     
-    this.router.navigateToRoute('step_3', { from: 'step_2' } );
+    setTimeout( () => {
+      this.router.navigateToRoute('step_3', { from: 'step_2' } );
+    }, 800);
+    
 
     /*
     this.luzzuApiService.sendRankingData( this.ranking )
