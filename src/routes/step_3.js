@@ -4,6 +4,9 @@ import {Router} from 'aurelia-router';
 import DataStore from '../services/data-store.js';
 import LuzzuApiService from '../services/luzzu-api-service.js';
 
+import taskDesc from 'raw-loader!../../static/task-2-desc.txt';
+import questions from 'raw-loader!../../static/questions.txt';
+
 @inject(Router, LuzzuApiService, DataStore)
 
 export class Step_3 {
@@ -19,9 +22,13 @@ export class Step_3 {
     this.dimensions = [];
     this.results = [];
 
+    this.taskDesc = taskDesc;
+
+    let tempQ = JSON.parse(questions);
+
     this.question = {
-      header: 'Question header',
-      text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit?',
+      header: tempQ['two'].header,
+      text: tempQ['two'].text,
       answer: null,
       disabled: true
     }

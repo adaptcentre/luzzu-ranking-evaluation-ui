@@ -76,9 +76,6 @@ export default class LuzzuApiService {
       return response.json();
     })
     .then( (data) => {
-      
-      console.log(data)
-      
       let output = [];
 
       for( let category of data.Categories ) {

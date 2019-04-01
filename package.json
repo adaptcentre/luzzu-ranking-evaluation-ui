@@ -19,7 +19,8 @@
     "d3": "^5.9.1",
     "ion-rangeslider": "^2.3.0",
     "jquery": "^3.3.1",
-    "popper.js": "^1.14.7"
+    "popper.js": "^1.14.7",
+    "raw-loader": "^2.0.0"
   },
   "peerDependencies": {},
   "devDependencies": {

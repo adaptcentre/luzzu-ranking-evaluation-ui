@@ -15,14 +15,6 @@ export class Step3Ranking {
 
   activate() {
     this.loading = true;
-    
-
-    return new Promise( (resolve) => {
-      setTimeout( () => {
-        resolve()
-      },4000)
-    })
-    
   }
 
   deactivate() {

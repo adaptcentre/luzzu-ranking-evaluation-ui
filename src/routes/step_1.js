@@ -1,6 +1,9 @@
 import {inject} from 'aurelia-framework';
 import {Router} from 'aurelia-router';
 
+import evaluationDesc from 'raw-loader!../../static/evaluation-desc.txt';
+import consentFormHTML from 'raw-loader!../../static/consentform.txt';
+
 @inject(Router)
 
 export class Step_1 {
@@ -9,6 +12,9 @@ export class Step_1 {
 		this.router = Router;
 		this.consent_checked = false;
 		this.loading = true;
+
+		this.consentFormHTML = consentFormHTML;
+		this.evaluationDesc = evaluationDesc;
 	}
 
 	attached() {

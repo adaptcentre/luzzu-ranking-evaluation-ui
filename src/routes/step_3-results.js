@@ -22,10 +22,6 @@ export class Step3Results {
 
       let requestObj = this.dataStore.createResultRequestObject( this.parent.ranking );
       
-      console.log('\n----------');
-      console.log( JSON.stringify(requestObj,null, '\t') );
-      console.log('\n----------');
-
       this.luzzuApiService.getResults(requestObj)
       .then( (resultData) => {
         console.log('step-3-results got results data from api');

@@ -4,6 +4,9 @@ import {Router} from 'aurelia-router';
 import DataStore from '../services/data-store.js';
 import LuzzuApiService from '../services/luzzu-api-service.js';
 
+import taskDesc from 'raw-loader!../../static/task-1-desc.txt';
+import questions from 'raw-loader!../../static/questions.txt';
+
 @inject(Router, LuzzuApiService, DataStore)
 
 // this.router.currentInstruction.fragment === 'ranking
@@ -22,9 +25,13 @@ export class Step_2 {
     this.ranking = [];
     this.results = [];
 
+    this.taskDesc = taskDesc;
+
+    let tempQ = JSON.parse(questions);
+
     this.question = {
-      header: 'Question header',
-      text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit?',
+      header: tempQ['one'].header,
+      text: tempQ['one'].text,
       answer: null,
       disabled: true
     }
