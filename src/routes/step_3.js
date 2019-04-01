@@ -15,7 +15,7 @@ export class Step_3 {
     this.loading = true;
 
     this.ranking = []; // should get populated in activate hook
-    this.metrics = [];
+    this.dimensions = [];
     this.results = [];
   }
 
@@ -47,10 +47,10 @@ export class Step_3 {
     });
 
     let p2 = new Promise( (resolve, reject) => {
-      this.luzzuApiService.getMetrics()
-      .then( (metricData) => {
+      this.luzzuApiService.getDimensions()
+      .then( (dimensionsData) => {
       
-        this.dataStore.setMetrics( metricData );
+        this.dataStore.setDimensions( dimensionsData );
         resolve();
       });
     });
@@ -65,7 +65,7 @@ export class Step_3 {
   }
   
   openModal() {
-    $('#addMetricModal').modal({});
+    $('#addDimensionModal').modal({});
   }
 
   debug() {
@@ -85,31 +85,31 @@ export class Step_3 {
     this.ranking.splice(index, 1);
   }
 
-  addMetricToRanking(event) {
-    let metricsToAdd = event.detail;
+  addDimensionsToRanking(event) {
+    let dimensionsToAdd = event.detail;
     
-    for(let metricId of metricsToAdd) {
-      let metric = {
-        name: metricId.name,
-        id: metricId.id,
+    for(let dimId of dimensionsToAdd) {
+      let dimension = {
+        name: dimId.name,
+        id: dimId.id,
         value: 0
       }
 
-      this.ranking.push(metric);
+      this.ranking.push(dimension);
     }
 
-    this.metrics = this.filterMetrics( this.dataStore.getMetrics() );
+    this.dimensions = this.filterDimensions( this.dataStore.getDimensions() );
   }
 
   reset() {
     this.ranking = this.dataStore.getRanking();
-    this.metrics = this.filterMetrics( this.dataStore.getMetrics() );
+    this.dimensions = this.filterDimensions( this.dataStore.getDimensions() );
   }
 
   // need this so we cannot add the same ones twice
-  filterMetrics( metrics ) {
+  filterDimensions( dimensions ) {
 
-    return metrics.filter( (el) => {
+    return dimensions.filter( (el) => {
       
       let found = this.ranking.findIndex( (elm) => {
         return el.id === elm.id;

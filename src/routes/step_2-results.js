@@ -10,5 +10,6 @@ export class Step2Results {
   }
 
   attached() {
+    this.parent.changedSubView();
   }
 }

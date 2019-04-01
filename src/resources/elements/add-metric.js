@@ -42,7 +42,7 @@ export class AddMetric {
 
     this.element.dispatchEvent(event);
 
-    $('#addMetricModal').modal('toggle')
+    $('#addDimensionModal').modal('toggle');
   }
 }
 

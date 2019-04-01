@@ -1,7 +1,4 @@
 import { inject } from 'aurelia-framework';
-import LuzzuApiService from '../services/luzzu-api-service.js';
-
-@inject(LuzzuApiService)
 
 export default class DataStore {
 
@@ -10,7 +7,13 @@ export default class DataStore {
     this.results = [];
     this.dimensions= [];
 
-    this.luzzuApiService = LuzzuApiService;
+    // @toDo
+    this.results = {
+      id: null,
+      step1: {},
+      step2: {},
+      step3: {}
+    }
   }
 
   setRanking( ranking ) {

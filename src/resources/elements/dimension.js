@@ -46,7 +46,7 @@ export class Dimension {
   remove() {
     //https://stackoverflow.com/questions/39055388/in-aurelia-can-i-bind-a-function-from-my-containing-view-model-to-be-called-by/39056533
     
-    let event = new CustomEvent('remove-metric', { 
+    let event = new CustomEvent('remove-dimension', { 
       detail: this.dimension.id,
       bubbles: true
     });

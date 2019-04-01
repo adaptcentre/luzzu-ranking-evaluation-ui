@@ -80,6 +80,10 @@ export class Step_2 {
     this.ranking = this.dataStore.getRanking();
     this.results = this.dataStore.getResults();
   }
+
+  changedSubView() {
+    console.log('changed subview');
+  }
   
 	next() {
     this.loading = true;
