@@ -1,0 +1,40 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+* {
+  font-family: 'Roboto', sans-serif;
+}
+
+
+.loading-container {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color:rgba(255,255,255,0.7);
+  z-index: 999;
+}
+
+.fitScreenY {
+  min-height: 100vh;
+}
+
+.task-selection {
+  transition: all 0.5s;
+  border: 1px solid #6e757c;
+}
+
+.task-selection:hover {
+  background-color: white !important;
+  color: #212428 !important;
+  cursor: pointer;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.no-select {
+  user-select: none;
+}
+
+/*# sourceMappingURL=../app~d0ae3f07.91bbbd9eed74383c09ed.bundle.map*/
