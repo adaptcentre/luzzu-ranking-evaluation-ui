@@ -83,7 +83,7 @@ export default class DataStore {
     }
 
     if(name === 'Trustworthiness') {
-      return 'http://purl.org/eis/vocab/lsqm#TrustworthinessDimension';
+      return 'http://github.io/jerdeb/lsqm#TrustworthinessDimension';
     }
 
     return '';

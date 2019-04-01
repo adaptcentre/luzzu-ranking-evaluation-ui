@@ -19,6 +19,10 @@ export class Step3Results {
     return new Promise( (resolve, reject) => {
 
       let requestObj = this.dataStore.createResultRequestObject();
+      
+      console.log('\n----------');
+      console.log( JSON.stringify(requestObj,null, '\t') );
+      console.log('\n----------');
 
       this.luzzuApiService.getResults(requestObj)
       .then( (resultData) => {
