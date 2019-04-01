@@ -17,6 +17,13 @@ export class Step_3 {
     this.ranking = []; // should get populated in activate hook
     this.dimensions = [];
     this.results = [];
+
+    this.question = {
+      header: 'Question header',
+      text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit?',
+      answer: null,
+      disabled: true
+    }
   }
 
   configureRouter(config, router, params) {

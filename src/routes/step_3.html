@@ -17,14 +17,15 @@
       </div>
     </div>
     
-    <div class="row">
+    <div class="row mt-3"> 
       <div class="col-12">
-        <p> Lorem ipsum dolor, sit amet consectetur adipisicing elit. Beatae sint earum possimus commodi aut quaerat fuga, nostrum asperiores iste quia atque quod officiis, incidunt repellat culpa libero aperiam neque sequi!</p>
+        <require from="../resources/elements/question"></require>
+	      <question question.bind="question"></question>
       </div>
     </div>
 
     <!-- Ranking/Results Navigation-->
-    <div class="row mt-3">
+    <div class="row mt-5">
         <div class="col-12">
           <ul class="nav nav-tabs nav-fill">
             <li class="nav-item">
@@ -38,7 +39,7 @@
       </div>
 
       <!-- Router View -->
-    <div class="row">
+    <div class="row mt-5">
       <div class="col-12">
         <router-view></router-view>
       </div>
@@ -53,7 +54,7 @@
           <button type="button" class="btn btn-warning btn-lg btn-block" click.delegate="debug()"> Debug </button>
         </div>
       <div class="col-5 ">
-          <button type="button" class="btn btn-success btn-lg btn-block" click.delegate="next()"> Next </button>
+          <button type="button" class="btn btn-success btn-lg btn-block" click.delegate="next()" disabled.bind="question.disabled"> Next </button>
       </div>
     </div>
 
