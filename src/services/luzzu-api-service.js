@@ -64,31 +64,38 @@ export default class LuzzuApiService {
 
   getDimensions() {
 
-    let mockDimensions = [
-      { name: 'Interoperability', desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum optio consectetur itaque exercitationem nisi commodi, molestias deleniti expedita doloremque ea tempore modi quidem magnam. Necessitatibus impedit veritatis ipsa architecto distinctio' },
-      { name: 'Licensing',  desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum optio consectetur itaque exercitationem nisi commodi, molestias deleniti expedita doloremque ea tempore modi quidem magnam. Necessitatibus impedit veritatis ipsa architecto distinctio'  },
-      { name: 'Trustworthiness',  desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum optio consectetur itaque exercitationem nisi commodi, molestias deleniti expedita doloremque ea tempore modi quidem magnam. Necessitatibus impedit veritatis ipsa architecto distinctio'  },
-      { name: 'Lorem 222',  desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum optio consectetur itaque exercitationem nisi commodi, molestias deleniti expedita doloremque ea tempore modi quidem magnam. Necessitatibus impedit veritatis ipsa architecto distinctio'  },
-      { name: 'Lorem 333',  desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum optio consectetur itaque exercitationem nisi commodi, molestias deleniti expedita doloremque ea tempore modi quidem magnam. Necessitatibus impedit veritatis ipsa architecto distinctio'  },
-      { name: 'Lorem 444',  desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum optio consectetur itaque exercitationem nisi commodi, molestias deleniti expedita doloremque ea tempore modi quidem magnam. Necessitatibus impedit veritatis ipsa architecto distinctio'  },
-      { name: 'Lorem 555',  desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum optio consectetur itaque exercitationem nisi commodi, molestias deleniti expedita doloremque ea tempore modi quidem magnam. Necessitatibus impedit veritatis ipsa architecto distinctio'  },
-      { name: 'Lorem 666',  desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum optio consectetur itaque exercitationem nisi commodi, molestias deleniti expedita doloremque ea tempore modi quidem magnam. Necessitatibus impedit veritatis ipsa architecto distinctio'  },
-      { name: 'Lorem 777',  desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum optio consectetur itaque exercitationem nisi commodi, molestias deleniti expedita doloremque ea tempore modi quidem magnam. Necessitatibus impedit veritatis ipsa architecto distinctio'  },
-      { name: 'Lorem 888',  desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum optio consectetur itaque exercitationem nisi commodi, molestias deleniti expedita doloremque ea tempore modi quidem magnam. Necessitatibus impedit veritatis ipsa architecto distinctio'  },
-      { name: 'Lorem 999',  desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum optio consectetur itaque exercitationem nisi commodi, molestias deleniti expedita doloremque ea tempore modi quidem magnam. Necessitatibus impedit veritatis ipsa architecto distinctio'  },
-      { name: 'Lorem 100',  desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum optio consectetur itaque exercitationem nisi commodi, molestias deleniti expedita doloremque ea tempore modi quidem magnam. Necessitatibus impedit veritatis ipsa architecto distinctio'  },
-      { name: 'Lorem 200',  desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum optio consectetur itaque exercitationem nisi commodi, molestias deleniti expedita doloremque ea tempore modi quidem magnam. Necessitatibus impedit veritatis ipsa architecto distinctio'  },
-      { name: 'Lorem 300',  desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum optio consectetur itaque exercitationem nisi commodi, molestias deleniti expedita doloremque ea tempore modi quidem magnam. Necessitatibus impedit veritatis ipsa architecto distinctio'  }
-    ];
+    //framework-apis/v4/framework/filtering-facets/ 
+    let endpoint = 'framework-apis/v4/framework/filtering-facets/';
 
-    console.log('Getting dimensions from API (mock)');
-
-    return new Promise( (resolve, reject) => {
+    console.log('Getting dimensions from API');
+    
+    return this.httpClient.fetch(endpoint, { 
+      method: 'get'
+    })
+    .then( (response) => {
+      return response.json();
+    })
+    .then( (data) => {
       
-      setTimeout( () => {
+      console.log(data)
+      
+      let output = [];
 
-        resolve( mockDimensions );
-      }, getRandomArbitrary( 500, 2000) );
+      for( let category of data.Categories ) {
+        for( let dimension of category.Dimensions) {
+          output.push({
+            name: dimension.Label,
+            desc: dimension.Comment,
+            uri: dimension.URI
+          })
+        }
+      }
+
+      return output;
+    })
+    .catch( (err) => {
+      console.log( err );
+      return [];
     });
   }
 

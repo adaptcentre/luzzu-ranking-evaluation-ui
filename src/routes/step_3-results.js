@@ -12,9 +12,11 @@ export class Step3Results {
     this.luzzuApiService = LuzzuApiService;
     this.dataStore = DataStore;
     this.parent = Step_3;
+    this.loading = true;
   }
 
   activate() {
+    this.loading = true;
     //need to get results each time as the ranking can change
     return new Promise( (resolve, reject) => {
 
@@ -35,7 +37,12 @@ export class Step3Results {
     });
   }
 
+  deactivate() {
+    this.loading = true;
+  }
+
   attached() {
     this.parent.changedSubView();
+    this.loading = false;
   }
 }

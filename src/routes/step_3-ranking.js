@@ -10,9 +10,27 @@ export class Step3Ranking {
   
   constructor(Step_3) {
     this.parent = Step_3;
+    this.loading = true;
+  }
+
+  activate() {
+    this.loading = true;
+    
+
+    return new Promise( (resolve) => {
+      setTimeout( () => {
+        resolve()
+      },4000)
+    })
+    
+  }
+
+  deactivate() {
+    this.loading = true;
   }
 
   attached() {
     this.parent.changedSubView();
+    this.loading = false;
   }
 }

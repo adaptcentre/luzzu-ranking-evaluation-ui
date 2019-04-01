@@ -11,7 +11,7 @@ export default class DataStore {
 
     this.ranking = [];
     this.results = [];
-    this.dimensions= [];
+    this.dimensions = [];
 
     // @toDo
     this.userData = {
@@ -38,7 +38,7 @@ export default class DataStore {
     return JSON.parse( JSON.stringify( this.results ) );
   }
 
-  setDimensions(dimensionsData) {
+  setDimensions( dimensionsData ) {
     this.dimensions = dimensionsData;
   }
 
@@ -74,19 +74,11 @@ export default class DataStore {
   }
 
   getDimensionURI(name) {
-
-    if(name === 'Interoperability') {
-      return 'http://purl.org/eis/vocab/dqm#Interoperability';
+    
+    let res = this.dimensions.findIndex( (el) => { return el.name === name; } );
+  
+    if(res !== -1) {
+      return this.dimensions[res].uri;
     }
-
-    if(name === 'Licensing') {
-      return 'http://purl.org/eis/vocab/dqm#Licensing';
-    }
-
-    if(name === 'Trustworthiness') {
-      return 'http://github.io/jerdeb/lsqm#TrustworthinessDimension';
-    }
-
-    return '';
   }
 }
