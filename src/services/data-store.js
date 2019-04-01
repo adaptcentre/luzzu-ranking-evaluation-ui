@@ -54,14 +54,15 @@ export default class DataStore {
     }
   }
 
-  createResultRequestObject() {
-   
+  createResultRequestObject( ranking ) {
+    
+    ranking = ranking || this.ranking;
     //first convert value to api value
-    this.converter.convertOutgoing( this.ranking );
+    this.converter.convertOutgoing( ranking );
 
     let result = [];
     
-    for( let dimension of this.ranking ) {
+    for( let dimension of ranking ) {
       result.push({
         type: 'dimension',
         uri: this.getDimensionURI( dimension.name ),
