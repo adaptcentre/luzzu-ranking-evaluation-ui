@@ -1,18 +1,19 @@
 import { inject } from 'aurelia-framework';
 import {PLATFORM} from 'aurelia-pal';
-
+import {Router} from 'aurelia-router';
 import DataStore from '../services/data-store.js';
 import LuzzuApiService from '../services/luzzu-api-service.js';
 
-@inject(LuzzuApiService, DataStore)
+@inject(Router, LuzzuApiService, DataStore)
 
 // this.router.currentInstruction.fragment === 'ranking
 // ${router.currentInstruction.fragment === ''ranking ? 'active' : ''}
 
 export class Step_2 {
 	
-	constructor(LuzzuApiService, DataStore) {
-    //this.router = Router;
+	constructor(Router, LuzzuApiService, DataStore) {
+    
+    this.mainRouter = Router;
     this.luzzuApiService = LuzzuApiService;
     this.dataStore = DataStore;
     
@@ -36,7 +37,7 @@ export class Step_2 {
 			{ route: 'results',   name: 'results',  moduleId: PLATFORM.moduleName( 'routes/step_2-results') }
     ]);
     
-    this.router = router;
+    this.childRouter = router;
 	}
   
   activate() {
@@ -88,9 +89,7 @@ export class Step_2 {
 	next() {
     this.loading = true;
     
-    setTimeout( () => {
-      this.router.navigateToRoute('step_3', { from: 'step_2' } );
-    }, 800);
+    this.mainRouter.navigate('step_3/ranking')
     
 
     /*

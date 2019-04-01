@@ -1,14 +1,15 @@
 import { inject } from 'aurelia-framework';
 import {PLATFORM} from 'aurelia-pal';
-
+import {Router} from 'aurelia-router';
 import DataStore from '../services/data-store.js';
 import LuzzuApiService from '../services/luzzu-api-service.js';
 
-@inject(LuzzuApiService, DataStore)
+@inject(Router, LuzzuApiService, DataStore)
 
 export class Step_3 {
 	
-	constructor(LuzzuApiService, DataStore) {
+	constructor(Router, LuzzuApiService, DataStore) {
+    this.mainRouter = Router;
     this.luzzuApiService = LuzzuApiService;
     this.dataStore = DataStore;
     
@@ -33,7 +34,7 @@ export class Step_3 {
 			{ route: 'results',   name: 'results',  moduleId: PLATFORM.moduleName( 'routes/step_3-results') }
     ]);
     
-    this.router = router;
+    this.childRouter = router;
 	}
   
   
@@ -77,6 +78,10 @@ export class Step_3 {
 
   debug() {
     this.luzzuApiService.sendRankingData( this.ranking )
+  }
+
+  changedSubView() {
+    console.log('changed subview');
   }
 
   //------
@@ -138,7 +143,7 @@ export class Step_3 {
     this.luzzuApiService.sendRankingData( this.ranking )
       .then( (results) => {
         this.dataStore.setResults( results );
-        this.router.navigateToRoute('step_4', { from: 'step_3' } );
+        this.mainRouter.navigateToRoute('step_4', { from: 'step_3' } );
       });
 	}
 }

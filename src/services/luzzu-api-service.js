@@ -17,7 +17,7 @@ export default class LuzzuApiService {
     this.httpClient.configure( config => {
       config
         .useStandardConfiguration()
-        .withBaseUrl('http://irc-eval.adaptcentre.ie/framework-apis/v4/')
+        .withBaseUrl('http://irc-eval.adaptcentre.ie/')
         .withDefaults({
          // credentials: 'same-origin',
           headers: {
@@ -29,29 +29,111 @@ export default class LuzzuApiService {
   }
 
   getRankingData() {
-    let mockData = [
-      { id: 0, name: 'Interoperability', value: 0, apiValue: '28.85' },
-      { id: 1, name: 'Licensing',        value: 0, apiValue: '26.42' },
-      { id: 2, name: 'Trustworthiness',  value: 0, apiValue: '44.74' }
-    ]
-
+    
+    // http://irc-eval.adaptcentre.ie/recommender/get_recommendation/
     // {\"Trustworthiness\": 0.4473684210526316, \"Interoperability\": 0.28846153846153844, \"Licensing\": 0.26417004048583}
 
     console.log('Getting ranking data from API');
+
+    let endpoint = 'recommender/get_recommendation';
+    
+    return this.httpClient.fetch(endpoint, { 
+      method: 'get'
+    })
+    .then( (response) => {
+      return response.json();
+    })
+    .then( (data) => {
+      data = JSON.parse(data); //not sure is needed?
+      
+      let output = [];
+
+      for(let [key, value] of Object.entries(data) ) {
+        output.push( { name: key, apiValue: value, value: 0 } );
+      }
+
+      this.converter.convertIncomming( output ); //might need to move this
+
+      return output;
+    })
+    .catch( (err) => {
+      console.log( err );
+      return [];
+    });
+  }
+
+  getDimensions() {
+
+    let mockDimensions = [
+      { name: 'Interoperability', desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum optio consectetur itaque exercitationem nisi commodi, molestias deleniti expedita doloremque ea tempore modi quidem magnam. Necessitatibus impedit veritatis ipsa architecto distinctio' },
+      { name: 'Licensing',  desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum optio consectetur itaque exercitationem nisi commodi, molestias deleniti expedita doloremque ea tempore modi quidem magnam. Necessitatibus impedit veritatis ipsa architecto distinctio'  },
+      { name: 'Trustworthiness',  desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum optio consectetur itaque exercitationem nisi commodi, molestias deleniti expedita doloremque ea tempore modi quidem magnam. Necessitatibus impedit veritatis ipsa architecto distinctio'  },
+      { name: 'Lorem 222',  desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum optio consectetur itaque exercitationem nisi commodi, molestias deleniti expedita doloremque ea tempore modi quidem magnam. Necessitatibus impedit veritatis ipsa architecto distinctio'  },
+      { name: 'Lorem 333',  desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum optio consectetur itaque exercitationem nisi commodi, molestias deleniti expedita doloremque ea tempore modi quidem magnam. Necessitatibus impedit veritatis ipsa architecto distinctio'  },
+      { name: 'Lorem 444',  desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum optio consectetur itaque exercitationem nisi commodi, molestias deleniti expedita doloremque ea tempore modi quidem magnam. Necessitatibus impedit veritatis ipsa architecto distinctio'  },
+      { name: 'Lorem 555',  desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum optio consectetur itaque exercitationem nisi commodi, molestias deleniti expedita doloremque ea tempore modi quidem magnam. Necessitatibus impedit veritatis ipsa architecto distinctio'  },
+      { name: 'Lorem 666',  desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum optio consectetur itaque exercitationem nisi commodi, molestias deleniti expedita doloremque ea tempore modi quidem magnam. Necessitatibus impedit veritatis ipsa architecto distinctio'  },
+      { name: 'Lorem 777',  desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum optio consectetur itaque exercitationem nisi commodi, molestias deleniti expedita doloremque ea tempore modi quidem magnam. Necessitatibus impedit veritatis ipsa architecto distinctio'  },
+      { name: 'Lorem 888',  desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum optio consectetur itaque exercitationem nisi commodi, molestias deleniti expedita doloremque ea tempore modi quidem magnam. Necessitatibus impedit veritatis ipsa architecto distinctio'  },
+      { iname: 'Lorem 999',  desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum optio consectetur itaque exercitationem nisi commodi, molestias deleniti expedita doloremque ea tempore modi quidem magnam. Necessitatibus impedit veritatis ipsa architecto distinctio'  },
+      { iname: 'Lorem 100',  desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum optio consectetur itaque exercitationem nisi commodi, molestias deleniti expedita doloremque ea tempore modi quidem magnam. Necessitatibus impedit veritatis ipsa architecto distinctio'  },
+      { iname: 'Lorem 200',  desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum optio consectetur itaque exercitationem nisi commodi, molestias deleniti expedita doloremque ea tempore modi quidem magnam. Necessitatibus impedit veritatis ipsa architecto distinctio'  },
+      { iname: 'Lorem 300',  desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum optio consectetur itaque exercitationem nisi commodi, molestias deleniti expedita doloremque ea tempore modi quidem magnam. Necessitatibus impedit veritatis ipsa architecto distinctio'  }
+    ];
+
+    console.log('Getting dimensions from API (mock)');
 
     return new Promise( (resolve, reject) => {
       
       setTimeout( () => {
 
-        this.converter.convertIncomming( mockData );
-
-        console.table( JSON.parse( JSON.stringify(mockData) ) );
-
-        resolve( mockData );
+        resolve( mockDimensions );
       }, getRandomArbitrary( 500, 2000) );
     });
   }
 
+  getResults( requestObj ) {
+    //http://irc-eval.adaptcentre.ie/framework-apis/v4/irc-evaluation/rank/weighted/
+    let endpoint = 'framework-apis/v4/irc-evaluation/rank/weighted/';
+    
+    if(!requestObj) {
+      requestObj = [
+        {
+            "type":"dimension",
+            "uri":"http://purl.org/eis/vocab/dqm#Interoperability",
+            "weight":"0.2692"
+        },
+        {
+            "type":"dimension",
+            "uri":"http://purl.org/eis/vocab/dqm#Licensing",
+            "weight":"0.2471"
+        },
+        {
+            "type":"dimension",
+            "uri":"http://github.io/jerdeb/lsqm#TrustworthinessDimension",
+            "weight":"0.4837"
+        }
+      ];
+    }
+
+    return this.httpClient.fetch(endpoint, { 
+      method: 'post',
+      body: json( requestObj ) 
+    })
+    .then( (response) => {
+      return response.json();
+    })
+    .then( (data) => {
+      return data;
+    })
+    .catch( (err) => {
+      console.log( err );
+      return [];
+    });
+  }
+
+
+  //---
   sendRankingData( data ) {
 
     let results = [
@@ -65,7 +147,7 @@ export default class LuzzuApiService {
 
 
     let mockData = data.map( (el) => {
-      return { id: el.id, name: el.name, value: el.value }
+      return { name: el.name, value: el.value }
     })
 
     this.converter.convertOutgoing( mockData );
@@ -82,92 +164,7 @@ export default class LuzzuApiService {
 
     
   }
-
-  getDimensions() {
-
-    let mockDimensions = [
-      { id: 0, name: 'Interoperability', desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum optio consectetur itaque exercitationem nisi commodi, molestias deleniti expedita doloremque ea tempore modi quidem magnam. Necessitatibus impedit veritatis ipsa architecto distinctio' },
-      { id: 1, name: 'Licensing',  desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum optio consectetur itaque exercitationem nisi commodi, molestias deleniti expedita doloremque ea tempore modi quidem magnam. Necessitatibus impedit veritatis ipsa architecto distinctio'  },
-      { id: 2, name: 'Trustworthiness',  desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum optio consectetur itaque exercitationem nisi commodi, molestias deleniti expedita doloremque ea tempore modi quidem magnam. Necessitatibus impedit veritatis ipsa architecto distinctio'  },
-      { id: 3, name: 'Lorem 222',  desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum optio consectetur itaque exercitationem nisi commodi, molestias deleniti expedita doloremque ea tempore modi quidem magnam. Necessitatibus impedit veritatis ipsa architecto distinctio'  },
-      { id: 4, name: 'Lorem 333',  desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum optio consectetur itaque exercitationem nisi commodi, molestias deleniti expedita doloremque ea tempore modi quidem magnam. Necessitatibus impedit veritatis ipsa architecto distinctio'  },
-      { id: 5, name: 'Lorem 444',  desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum optio consectetur itaque exercitationem nisi commodi, molestias deleniti expedita doloremque ea tempore modi quidem magnam. Necessitatibus impedit veritatis ipsa architecto distinctio'  },
-      { id: 6, name: 'Lorem 555',  desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum optio consectetur itaque exercitationem nisi commodi, molestias deleniti expedita doloremque ea tempore modi quidem magnam. Necessitatibus impedit veritatis ipsa architecto distinctio'  },
-      { id: 7, name: 'Lorem 666',  desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum optio consectetur itaque exercitationem nisi commodi, molestias deleniti expedita doloremque ea tempore modi quidem magnam. Necessitatibus impedit veritatis ipsa architecto distinctio'  },
-      { id: 8, name: 'Lorem 777',  desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum optio consectetur itaque exercitationem nisi commodi, molestias deleniti expedita doloremque ea tempore modi quidem magnam. Necessitatibus impedit veritatis ipsa architecto distinctio'  },
-      { id: 9, name: 'Lorem 888',  desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum optio consectetur itaque exercitationem nisi commodi, molestias deleniti expedita doloremque ea tempore modi quidem magnam. Necessitatibus impedit veritatis ipsa architecto distinctio'  },
-      { id: 10, name: 'Lorem 999',  desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum optio consectetur itaque exercitationem nisi commodi, molestias deleniti expedita doloremque ea tempore modi quidem magnam. Necessitatibus impedit veritatis ipsa architecto distinctio'  },
-      { id: 11, name: 'Lorem 100',  desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum optio consectetur itaque exercitationem nisi commodi, molestias deleniti expedita doloremque ea tempore modi quidem magnam. Necessitatibus impedit veritatis ipsa architecto distinctio'  },
-      { id: 12, name: 'Lorem 200',  desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum optio consectetur itaque exercitationem nisi commodi, molestias deleniti expedita doloremque ea tempore modi quidem magnam. Necessitatibus impedit veritatis ipsa architecto distinctio'  },
-      { id: 13, name: 'Lorem 300',  desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum optio consectetur itaque exercitationem nisi commodi, molestias deleniti expedita doloremque ea tempore modi quidem magnam. Necessitatibus impedit veritatis ipsa architecto distinctio'  }
-    ];
-
-    console.log('Getting dimensions from API (mock)');
-
-    return new Promise( (resolve, reject) => {
-      
-      setTimeout( () => {
-
-        resolve( mockDimensions );
-      }, getRandomArbitrary( 500, 2000) );
-    });
-  }
-
-  /*
-  getResults() {
-
-    let mockResults = [1,2,3,4,5,6,7,8,9];
-
-    console.log('Getting results from API (mock)');
-
-    return new Promise( (resolve, reject) => {
-      
-      setTimeout( () => {
-
-        resolve( mockResults );
-      }, getRandomArbitrary( 500, 2000) );
-    });
-  }
-  */
-
-  getResults() {
-    //http://irc-eval.adaptcentre.ie/framework-apis/v4/irc-evaluation/rank/weighted/
-    let endpoint = 'irc-evaluation/rank/weighted/';
-    
-    let mockPackage = [
-      {
-          "type":"dimension",
-          "uri":"http://purl.org/eis/vocab/dqm#Interoperability",
-          "weight":"0.2692"
-      },
-      {
-          "type":"dimension",
-          "uri":"http://purl.org/eis/vocab/dqm#Licensing",
-          "weight":"0.2471"
-      },
-      {
-          "type":"dimension",
-          "uri":"http://github.io/jerdeb/lsqm#TrustworthinessDimension",
-          "weight":"0.4837"
-      }
-    ];
-
-    return this.httpClient.fetch(endpoint, { 
-      method: 'post',
-      body: json( mockPackage ) 
-    })
-    .then( (response) => {
-      return response.json();
-    })
-    .then( (data) => {
-      return data;
-    })
-    .catch( (err) => {
-      console.log( err );
-      return [];
-    });
-  }
-
+  //---
 }
 
 

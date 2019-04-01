@@ -38,7 +38,7 @@ export class Dimension {
   }
 
   getDesc() {
-    let desc = this.dataStore.getDimensionsDesc( this.dimension.id );
+    let desc = this.dataStore.getDimensionsDesc( this.dimension.name );
     
     return desc;
   }
