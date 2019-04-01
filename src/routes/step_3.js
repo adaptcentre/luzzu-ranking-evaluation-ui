@@ -138,11 +138,6 @@ export class Step_3 {
 
 	next() {
     this.loading = true;
-    
-    this.luzzuApiService.sendRankingData( this.ranking )
-      .then( (results) => {
-        this.dataStore.setResults( results );
-        this.mainRouter.navigateToRoute('step_4', { from: 'step_3' } );
-      });
+    this.mainRouter.navigateToRoute('step_4', { from: 'step_3' } );
 	}
 }
