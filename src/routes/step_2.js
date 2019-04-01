@@ -20,6 +20,13 @@ export class Step_2 {
 
     this.ranking = [];
     this.results = [];
+
+    this.question = {
+      header: 'Question header',
+      text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit?',
+      answer: null,
+      disabled: true
+    }
   }
 
   configureRouter(config, router, params) {
@@ -34,42 +41,37 @@ export class Step_2 {
   
   activate() {
 
-    // populate dataStore
-
     // get ranking data
     let p1 = new Promise( (resolve, reject) => {
-
       this.luzzuApiService.getRankingData()
         .then( (rankingData) => {
-      
+          console.log('step-2 got ranking data from api');
           this.dataStore.setRanking( rankingData );
           resolve();
         });
     });
 
-    // get metric data
+    // get dimension data
     let p2 = new Promise( (resolve, reject) => {
-      this.luzzuApiService.getMetrics()
-      .then( (metricData) => {
-      
-        this.dataStore.setMetrics( metricData );
+      this.luzzuApiService.getDimensions()
+      .then( (dimensionData) => {
+        console.log('step-2 got dimension data from api');
+        this.dataStore.setDimensions( dimensionData );
         resolve();
       });
     });
 
-    // get result data
+    // get standard result data
     let p3 = new Promise( (resolve, reject) => {
       this.luzzuApiService.getResults()
       .then( (resultData) => {
-      
+        console.log('step-2 got results data from api');
         this.dataStore.setResults( resultData );
         resolve();
       });
     });
 
-    let p4 = this.luzzuApiService.getResultsTest();
-
-    return Promise.all([p1,p2,p3,p4]);
+    return Promise.all([p1, p2, p3]);
   }
 
 	attached() {
@@ -94,5 +96,5 @@ export class Step_2 {
         this.router.navigateToRoute('step_3', { from: 'step_2' } );
       });
     */
-	}
+  }
 }

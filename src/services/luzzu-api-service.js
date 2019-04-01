@@ -17,7 +17,7 @@ export default class LuzzuApiService {
     this.httpClient.configure( config => {
       config
         .useStandardConfiguration()
-        .withBaseUrl('http://luzzu.adaptcentre.ie/framework-apis/v4/')
+        .withBaseUrl('http://irc-eval.adaptcentre.ie/framework-apis/v4/')
         .withDefaults({
          // credentials: 'same-origin',
           headers: {
@@ -34,6 +34,8 @@ export default class LuzzuApiService {
       { id: 1, name: 'Licensing',        value: 0, apiValue: '26.42' },
       { id: 2, name: 'Trustworthiness',  value: 0, apiValue: '44.74' }
     ]
+
+    // {\"Trustworthiness\": 0.4473684210526316, \"Interoperability\": 0.28846153846153844, \"Licensing\": 0.26417004048583}
 
     console.log('Getting ranking data from API');
 
@@ -81,9 +83,9 @@ export default class LuzzuApiService {
     
   }
 
-  getMetrics() {
+  getDimensions() {
 
-    let mockMetrics = [
+    let mockDimensions = [
       { id: 0, name: 'Interoperability', desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum optio consectetur itaque exercitationem nisi commodi, molestias deleniti expedita doloremque ea tempore modi quidem magnam. Necessitatibus impedit veritatis ipsa architecto distinctio' },
       { id: 1, name: 'Licensing',  desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum optio consectetur itaque exercitationem nisi commodi, molestias deleniti expedita doloremque ea tempore modi quidem magnam. Necessitatibus impedit veritatis ipsa architecto distinctio'  },
       { id: 2, name: 'Trustworthiness',  desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum optio consectetur itaque exercitationem nisi commodi, molestias deleniti expedita doloremque ea tempore modi quidem magnam. Necessitatibus impedit veritatis ipsa architecto distinctio'  },
@@ -100,22 +102,23 @@ export default class LuzzuApiService {
       { id: 13, name: 'Lorem 300',  desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum optio consectetur itaque exercitationem nisi commodi, molestias deleniti expedita doloremque ea tempore modi quidem magnam. Necessitatibus impedit veritatis ipsa architecto distinctio'  }
     ];
 
-    console.log('Getting mertics + info from API');
+    console.log('Getting dimensions from API (mock)');
 
     return new Promise( (resolve, reject) => {
       
       setTimeout( () => {
 
-        resolve( mockMetrics );
+        resolve( mockDimensions );
       }, getRandomArbitrary( 500, 2000) );
     });
   }
 
+  /*
   getResults() {
 
     let mockResults = [1,2,3,4,5,6,7,8,9];
 
-    console.log('Getting results from API');
+    console.log('Getting results from API (mock)');
 
     return new Promise( (resolve, reject) => {
       
@@ -125,50 +128,51 @@ export default class LuzzuApiService {
       }, getRandomArbitrary( 500, 2000) );
     });
   }
+  */
 
-  getResultsTest() {
-    //http://luzzu.adaptcentre.ie/framework-apis/v4/lod-dataportal/rank/weighted/
-    let endpoint = 'lod-dataportal/rank/weighted/';
-
-    let mockPackage = {
-      "domain": "Government",
-      "weights": [
-        {
-          "type": "metric",
-          "uri": "http:\/\/purl.org\/eis\/vocab\/dqm#UndefinedClassesAndPropertiesMetric",
-          "weight": 0.5
-        },
-        {
-          "type": "metric",
-          "uri": "http:\/\/purl.org\/eis\/vocab\/dqm#CompatibleDatatype",
-          "weight": 0.3
-        },
-        {
-          "type": "metric",
-          "uri": "http:\/\/purl.org\/eis\/vocab\/dqm#UsageOfIncorrectDomainOrRangeDatatypesMetric",
-          "weight": 0.2
-        }
-      ]
-    }
+  getResults() {
+    //http://irc-eval.adaptcentre.ie/framework-apis/v4/irc-evaluation/rank/weighted/
+    let endpoint = 'irc-evaluation/rank/weighted/';
+    
+    let mockPackage = [
+      {
+          "type":"dimension",
+          "uri":"http://purl.org/eis/vocab/dqm#Interoperability",
+          "weight":"0.2692"
+      },
+      {
+          "type":"dimension",
+          "uri":"http://purl.org/eis/vocab/dqm#Licensing",
+          "weight":"0.2471"
+      },
+      {
+          "type":"dimension",
+          "uri":"http://github.io/jerdeb/lsqm#TrustworthinessDimension",
+          "weight":"0.4837"
+      }
+    ];
 
     return this.httpClient.fetch(endpoint, { 
       method: 'post',
-      body: json(mockPackage) 
+      body: json( mockPackage ) 
     })
-      .then( (response) => {
-        return response.json();
-      })
-      .then( (data) => {
-        console.log(data)
-      })
-      .catch( (err) => {
-        console.log( err );
-      });
+    .then( (response) => {
+      return response.json();
+    })
+    .then( (data) => {
+      return data;
+    })
+    .catch( (err) => {
+      console.log( err );
+      return [];
+    });
   }
 
 }
 
 
+// ---
+// HELPER
 // ---
 function getRandomArbitrary(min, max) {
   return Math.random() * (max - min) + min;

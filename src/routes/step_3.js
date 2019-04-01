@@ -74,7 +74,7 @@ export class Step_3 {
 
   //------
 
-  removeMetricFromRanking(event) {
+  removeDimensionFromRanking(event) {
 
     let id = event.detail;
 

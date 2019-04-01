@@ -1,7 +1,7 @@
 <template>
   
-    <require from="../resources/elements/metric"></require>
-    <metric class="row mt-3" repeat.for="metric of parent.ranking" metric.bind="metric" readonly.one-way="false" remove-metric.delegate="parent.removeMetricFromRanking($event)"></metric>
+    <require from="../resources/elements/dimension"></require>
+    <dimension class="row mt-3" repeat.for="dimension of parent.ranking" dimension.bind="dimension" readonly.one-way="false" remove-dimension.delegate="parent.removeDimensionFromRanking($event)"></dimension>
 
 
     <div class="row pointer">

@@ -1,0 +1,12 @@
+<template>
+  <h3> 
+    ${question.header}
+  </h3>
+  <p>
+    ${question.text}
+  </p>
+  <div class="btn-group btn-group-lg btn-block">
+    <button type="button" class="btn btn-outline-dark ${selected.yes ? 'active' : ''}" click.delegate="clickedAnswer($event.target,'yes')">Yes</button>
+    <button type="button" class="btn btn-outline-dark ${selected.no ? 'active' : ''}" click.delegate="clickedAnswer($event.target,'no')">No</button>
+  </div>
+</template>

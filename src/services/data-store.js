@@ -8,7 +8,7 @@ export default class DataStore {
   constructor(LuzzuApiService) {
     this.ranking = [];
     this.results = [];
-    this.metrics= [];
+    this.dimensions= [];
 
     this.luzzuApiService = LuzzuApiService;
   }
@@ -29,19 +29,19 @@ export default class DataStore {
     return JSON.parse( JSON.stringify( this.results ) );
   }
 
-  setMetrics(metricData) {
-    this.metrics = metricData;
+  setDimensions(dimensionsData) {
+    this.dimensions = dimensionsData;
   }
 
-  getMetrics() {
-    return JSON.parse( JSON.stringify( this.metrics ) );
+  getDimensions() {
+    return JSON.parse( JSON.stringify( this.dimensions ) );
   }
 
-  getMetricDesc( id ) {
-    let res = this.metrics.findIndex( (el) => { return el.id === id; } );
+  getDimensionsDesc( id ) {
+    let res = this.dimensions.findIndex( (el) => { return el.id === id; } );
 
     if(res !== -1) {
-      return this.metrics[res].desc;
+      return this.dimensions[res].desc;
     }
   }
 }
