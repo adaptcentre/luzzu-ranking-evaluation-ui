@@ -28,12 +28,12 @@ export default class LuzzuApiService {
     });
   }
 
-  getRankingData() {
+  getRanking() {
     
     // http://irc-eval.adaptcentre.ie/recommender/get_recommendation/
     // {\"Trustworthiness\": 0.4473684210526316, \"Interoperability\": 0.28846153846153844, \"Licensing\": 0.26417004048583}
 
-    console.log('Getting ranking data from API');
+    console.log('Getting ranking from API');
 
     let endpoint = 'recommender/get_recommendation';
     
@@ -131,40 +131,6 @@ export default class LuzzuApiService {
       return [];
     });
   }
-
-
-  //---
-  sendRankingData( data ) {
-
-    let results = [
-      { desc: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Beatae sint earum possimus commodi aut quaerat fuga, nostrum asperiores iste quia atque quod officiis, incidunt repellat culpa libero aperiam neque sequi' },
-      { desc: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Beatae sint earum possimus commodi aut quaerat fuga, nostrum asperiores iste quia atque quod officiis, incidunt repellat culpa libero aperiam neque sequi' },
-      { desc: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Beatae sint earum possimus commodi aut quaerat fuga, nostrum asperiores iste quia atque quod officiis, incidunt repellat culpa libero aperiam neque sequi' },
-      { desc: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Beatae sint earum possimus commodi aut quaerat fuga, nostrum asperiores iste quia atque quod officiis, incidunt repellat culpa libero aperiam neque sequi' },
-      { desc: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Beatae sint earum possimus commodi aut quaerat fuga, nostrum asperiores iste quia atque quod officiis, incidunt repellat culpa libero aperiam neque sequi' },
-      { desc: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Beatae sint earum possimus commodi aut quaerat fuga, nostrum asperiores iste quia atque quod officiis, incidunt repellat culpa libero aperiam neque sequi' }
-    ];
-
-
-    let mockData = data.map( (el) => {
-      return { name: el.name, value: el.value }
-    })
-
-    this.converter.convertOutgoing( mockData );
-    
-    console.log('Sending ranking data to API');
-    console.table( JSON.parse( JSON.stringify(mockData) ) );
-
-    return new Promise( (resolve, reject) => {
-      
-      setTimeout( () => {
-        resolve( results );
-      }, getRandomArbitrary( 500, 2000) );
-    })
-
-    
-  }
-  //---
 }
 
 

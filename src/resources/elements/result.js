@@ -36,6 +36,7 @@ export class Result {
   attached() {
     //onFinish
     console.log('result component attached');
+    this.rankValue = this.result['Rank-Value'].toFixed(4);
   }
 }
 

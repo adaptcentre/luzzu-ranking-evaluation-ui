@@ -44,7 +44,7 @@ export class Step_2 {
 
     // get ranking data
     let p1 = new Promise( (resolve, reject) => {
-      this.luzzuApiService.getRankingData()
+      this.luzzuApiService.getRanking()
         .then( (rankingData) => {
           this.dataStore.setRanking( rankingData );
           resolve();
