@@ -3,21 +3,23 @@ import {PLATFORM} from 'aurelia-pal';
 import {Router} from 'aurelia-router';
 import DataStore from '../services/data-store.js';
 import LuzzuApiService from '../services/luzzu-api-service.js';
+import MongoStitchApiService from '../services/mongo-stitch-api-service.js';
 
 import taskDesc from 'raw-loader!../../static/task-1-desc.txt';
 import questions from 'raw-loader!../../static/questions.txt';
 
-@inject(Router, LuzzuApiService, DataStore)
+@inject(Router, LuzzuApiService, MongoStitchApiService, DataStore)
 
 // this.router.currentInstruction.fragment === 'ranking
 // ${router.currentInstruction.fragment === ''ranking ? 'active' : ''}
 
 export class Step_2 {
 	
-	constructor(Router, LuzzuApiService, DataStore) {
+	constructor(Router, LuzzuApiService, MongoStitchApiService, DataStore) {
     
     this.mainRouter = Router;
     this.luzzuApiService = LuzzuApiService;
+    this.mongoStitchApiService = MongoStitchApiService;
     this.dataStore = DataStore;
     
     this.loading = true;
@@ -76,7 +78,14 @@ export class Step_2 {
       });
     });
 
-    return Promise.all([p1, p2, p3]);
+    let p4 = new Promise( (resolve, reject) => {
+      this.mongoStitchApiService.initSession().then( () => {
+        resolve();
+      })
+    });
+    
+    
+    return Promise.all([p1, p2, p3, p4]);
   }
 
 	attached() {
