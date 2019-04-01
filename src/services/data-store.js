@@ -48,7 +48,7 @@ export default class DataStore {
 
   getDimensionsDesc( name ) {
     let res = this.dimensions.findIndex( (el) => { return el.name === name; } );
-
+  
     if(res !== -1) {
       return this.dimensions[res].desc;
     }
@@ -65,7 +65,7 @@ export default class DataStore {
       result.push({
         type: 'dimension',
         uri: this.getDimensionURI( dimension.name ),
-        weight: dimension.apiValue
+        weight: dimension.apiValue.toString()
       });
     }
 
@@ -83,7 +83,7 @@ export default class DataStore {
     }
 
     if(name === 'Trustworthiness') {
-      return 'http://purl.org/eis/vocab/dqm#TrustworthinessDimension';
+      return 'http://purl.org/eis/vocab/lsqm#TrustworthinessDimension';
     }
 
     return '';

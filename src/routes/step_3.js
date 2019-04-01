@@ -57,13 +57,12 @@ export class Step_3 {
     let p2 = new Promise( (resolve, reject) => {
       this.luzzuApiService.getDimensions()
       .then( (dimensionsData) => {
-      
         this.dataStore.setDimensions( dimensionsData );
         resolve();
       });
     });
 
-    return Promise.all([p1,p2]);
+    return Promise.all([p1, p2]);
   }
 
 	attached() {
@@ -124,7 +123,7 @@ export class Step_3 {
     return dimensions.filter( (el) => {
       
       let found = this.ranking.findIndex( (elm) => {
-        return el.id === elm.id;
+        return el.name === elm.name;
       });
 
       if(found === -1) {

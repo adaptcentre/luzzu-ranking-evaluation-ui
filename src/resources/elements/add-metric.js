@@ -16,6 +16,7 @@ export class AddMetric {
   }
 
   attached() {
+    console.log(this.metrics)
   }
 
   selectMetric(metric) {

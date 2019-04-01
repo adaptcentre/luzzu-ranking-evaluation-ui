@@ -33,11 +33,11 @@ export default class RankingConverter {
     }, 0);
     
     let scale = d3.scaleLinear()
-      .domain([0,total])
-      .range([0, 100]);
+      .domain([0, total])
+      .range([0, 1]);
 
     for( let metric of metrics ) {
-      metric.apiValue = scale( metric.value ).toFixed(2);
+      metric.apiValue = scale( metric.value );
     }
   }
 

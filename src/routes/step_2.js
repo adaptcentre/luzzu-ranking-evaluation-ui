@@ -46,27 +46,24 @@ export class Step_2 {
     let p1 = new Promise( (resolve, reject) => {
       this.luzzuApiService.getRankingData()
         .then( (rankingData) => {
-          console.log('step-2 got ranking data from api');
           this.dataStore.setRanking( rankingData );
           resolve();
         });
     });
 
-    // get dimension data
+    // get dimension data - need this for descriptios
     let p2 = new Promise( (resolve, reject) => {
       this.luzzuApiService.getDimensions()
       .then( (dimensionData) => {
-        console.log('step-2 got dimension data from api');
         this.dataStore.setDimensions( dimensionData );
         resolve();
       });
     });
-
+    
     // get standard result data
     let p3 = new Promise( (resolve, reject) => {
       this.luzzuApiService.getResults()
       .then( (resultData) => {
-        console.log('step-2 got results data from api');
         this.dataStore.setResults( resultData );
         resolve();
       });

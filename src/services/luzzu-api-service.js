@@ -101,21 +101,21 @@ export default class LuzzuApiService {
         {
             "type":"dimension",
             "uri":"http://purl.org/eis/vocab/dqm#Interoperability",
-            "weight":"0.2692"
+            "weight": "0.2692"
         },
         {
             "type":"dimension",
             "uri":"http://purl.org/eis/vocab/dqm#Licensing",
-            "weight":"0.2471"
+            "weight": "0.2471"
         },
         {
-            "type":"dimension",
-            "uri":"http://github.io/jerdeb/lsqm#TrustworthinessDimension",
-            "weight":"0.4837"
+            "type": "dimension",
+            "uri": "http://github.io/jerdeb/lsqm#TrustworthinessDimension",
+            "weight": "0.4837"
         }
       ];
     }
-
+    
     return this.httpClient.fetch(endpoint, { 
       method: 'post',
       body: json( requestObj ) 

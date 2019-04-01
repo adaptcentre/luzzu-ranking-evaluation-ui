@@ -23,7 +23,7 @@ export class Step3Results {
       this.luzzuApiService.getResults(requestObj)
       .then( (resultData) => {
         console.log('step-3-results got results data from api');
-        
+      
         this.dataStore.setResults( resultData );
         this.parent.results = this.dataStore.getResults();
         resolve();
