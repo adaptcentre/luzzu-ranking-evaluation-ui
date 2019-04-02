@@ -38,7 +38,7 @@ export class Step3Results {
   }
 
   attached() {
-    this.parent.changedSubView();
+    this.parent.changedSubView('results');
     this.loading = false;
   }
 }

@@ -10,6 +10,6 @@ export class Step2Ranking {
   }
 
   attached() {
-    this.parent.changedSubView();
+    this.parent.changedSubView( 'ranking' );
   }
 }

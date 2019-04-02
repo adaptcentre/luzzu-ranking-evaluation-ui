@@ -16,9 +16,20 @@ export default class DataStore {
     // @toDo
     this.userData = {
       id: null,
-      step1: {},
-      step2: {},
-      step3: {}
+      time: { start: null, end: null },
+      step1: {
+        time: { start: null, end: null }
+      },
+      step2: {
+        time: { start: null, end: null },
+        views: [],
+        question: null
+      },
+      step3: {
+        time: { start: null, end: null },
+        views: [],
+        question: null
+      }
     }
   }
 
@@ -80,5 +91,36 @@ export default class DataStore {
     if(res !== -1) {
       return this.dimensions[res].uri;
     }
+  }
+
+  setParticipantId( id ) {
+    this.userData.id = id;
+  }
+
+  updateStep(step, time) {
+    this.userData[step].time = time;
+  }
+
+  addQuestion( step, question ) {
+    this.userData[step].question = question;
+  }
+
+  addRanking(step, ranking) {
+    this.userData[step].ranking = ranking;
+  }
+
+  changedSubView(step, data) {
+    this.userData[step].views.push( data );
+  }
+
+  getUserData() {
+    return JSON.parse( JSON.stringify( this.userData ) );
+  }
+
+  setUserDataTimeStart() {
+    this.userData.time.start = Date.now();
+  }
+  setUserDataTimeEnd() {
+    this.userData.time.end = Date.now();
   }
 }

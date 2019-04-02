@@ -3,17 +3,19 @@ import {PLATFORM} from 'aurelia-pal';
 import {Router} from 'aurelia-router';
 import DataStore from '../services/data-store.js';
 import LuzzuApiService from '../services/luzzu-api-service.js';
+import MongoStitchApiService from '../services/mongo-stitch-api-service.js';
 
 import taskDesc from 'raw-loader!../../static/task-2-desc.txt';
 import questions from 'raw-loader!../../static/questions.txt';
 
-@inject(Router, LuzzuApiService, DataStore)
+@inject(Router, LuzzuApiService, DataStore, MongoStitchApiService)
 
 export class Step_3 {
 	
-	constructor(Router, LuzzuApiService, DataStore) {
+	constructor(Router, LuzzuApiService, DataStore, MongoStitchApiService) {
     this.mainRouter = Router;
     this.luzzuApiService = LuzzuApiService;
+    this.mongoStitchApiService = MongoStitchApiService;
     this.dataStore = DataStore;
     
     this.loading = true;
@@ -31,6 +33,11 @@ export class Step_3 {
       text: tempQ['two'].text,
       answer: null,
       disabled: true
+    }
+
+    this.time = {
+      start: null,
+      end: null
     }
   }
 
@@ -75,6 +82,7 @@ export class Step_3 {
 	attached() {
     this.reset();
     this.loading = false;
+    this.time.start = Date.now();
     console.log('step 3 attached');
   }
   
@@ -86,8 +94,23 @@ export class Step_3 {
     this.luzzuApiService.sendRankingData( this.ranking )
   }
 
-  changedSubView() {
+  changedSubView( from ) {
     console.log('changed subview');
+    
+    let time = Date.now();
+    let output = '';
+
+    if(from === 'ranking') {
+      output = 'ranking to results';
+    } else {
+      output = 'results to ranking';
+    }
+
+    this.dataStore.changedSubView('step3', { 
+      from: output, 
+      time: time, 
+      ranking: this.dataStore.createResultRequestObject(this.ranking) 
+    });
   }
 
   //------
@@ -145,6 +168,21 @@ export class Step_3 {
 
 	next() {
     this.loading = true;
-    this.mainRouter.navigateToRoute('step_4', { from: 'step_3' } );
+    
+    this.dataStore.setUserDataTimeEnd();
+
+    this.time.end = Date.now();
+    
+    this.dataStore.addQuestion('step3', JSON.parse( JSON.stringify(this.question) ) );
+    this.dataStore.addRanking('step3', this.dataStore.createResultRequestObject(this.ranking) );
+    this.dataStore.updateStep('step3', this.time);
+
+    let userData = this.dataStore.getUserData();
+    //we need to send data to DB before we move on
+    this.mongoStitchApiService.sendResults(userData).then( (results) => {
+      //this.dataStore.setParticipantId( participant_id );
+      this.mainRouter.navigateToRoute('step_4');
+    })
+    
 	}
 }

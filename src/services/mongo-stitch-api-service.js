@@ -21,14 +21,12 @@ export default class MongoStitchApiService {
       this.client.auth.loginWithCredential( new AnonymousCredential() )
       .then( (user) => {
         console.log(`Logged in as anonymous user with id ${user.id}`);
-        
-        this.db = this.client.getServiceClient( RemoteMongoClient.factory, 'mongodb-atlas-luzzu-evaluation').db('Evaluation');
-
-        return this.db.collection('user-data').insertOne( { time: { start: Date.now(), end: null } } );
+        //this.db = this.client.getServiceClient( RemoteMongoClient.factory, 'mongodb-atlas-luzzu-evaluation').db('Evaluation');
+        //return this.db.collection('user-data').insertOne();
+        return user.id;
       })
-      .then( (result) => {
-        let id = result.insertedId.toString() 
-        console.log('successfully inserted:', id );
+      .then( (id) => {
+        //let id = result.insertedId.toString();
         resolve(id);
       })
       .catch(err => {
@@ -36,7 +34,39 @@ export default class MongoStitchApiService {
         reject(err);
       });
     });
-
     return p;
+  }
+
+  sendResults(userData) {
+    console.log('sending stuff to DB', userData);
+
+    return new Promise( (resolve, reject) => {
+      this.db = this.client.getServiceClient( RemoteMongoClient.factory, 'mongodb-atlas-luzzu-evaluation').db('Evaluation');
+      
+      this.db.collection('user-data')
+      .insertOne(userData)
+      .then( (result) => {
+        console.log('Insert Successfull', result.insertedId.toString());
+        resolve();
+      })
+      .catch( (err) => {
+        reject(err);
+      });
+
+      /*
+      return this.db.collection('user-data').updateOne(
+        {_id: userData.id},  //query
+        { $set:{ userData: userData } }, //update
+        {upsert: true} //options
+      )
+      .then( (result) => {
+        console.log(result);
+        resolve();
+      })
+      .catch( (err) => {
+        reject(err);
+      })
+      */
+    });
   }
 }

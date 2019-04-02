@@ -7,6 +7,7 @@ import MongoStitchApiService from '../services/mongo-stitch-api-service.js';
 
 import taskDesc from 'raw-loader!../../static/task-1-desc.txt';
 import questions from 'raw-loader!../../static/questions.txt';
+import { isNull } from 'util';
 
 @inject(Router, LuzzuApiService, MongoStitchApiService, DataStore)
 
@@ -36,6 +37,11 @@ export class Step_2 {
       text: tempQ['one'].text,
       answer: null,
       disabled: true
+    }
+
+    this.time = {
+      start: null,
+      end: null
     }
   }
 
@@ -79,7 +85,8 @@ export class Step_2 {
     });
 
     let p4 = new Promise( (resolve, reject) => {
-      this.mongoStitchApiService.initSession().then( () => {
+      this.mongoStitchApiService.initSession().then( (participant_id) => {
+        this.dataStore.setParticipantId( participant_id );
         resolve();
       })
     });
@@ -93,24 +100,33 @@ export class Step_2 {
 
     this.ranking = this.dataStore.getRanking();
     this.results = this.dataStore.getResults();
+
+    this.time.start = Date.now();
   }
 
-  changedSubView() {
+  changedSubView( from ) {
     console.log('changed subview');
+    
+    let time = Date.now();
+    let output = '';
+
+    if(from === 'ranking') {
+      output = 'ranking to results';
+    } else {
+      output = 'results to ranking';
+    }
+
+    this.dataStore.changedSubView('step2', { from: output, time: time  });
   }
   
 	next() {
     this.loading = true;
-    
-    this.mainRouter.navigate('step_3/ranking')
-    
 
-    /*
-    this.luzzuApiService.sendRankingData( this.ranking )
-      .then( (results) => {
-        this.dataStore.setResults( results );
-        this.router.navigateToRoute('step_3', { from: 'step_2' } );
-      });
-    */
+    this.time.end = Date.now();
+    
+    this.dataStore.addQuestion('step2', JSON.parse( JSON.stringify(this.question) ) );
+    this.dataStore.updateStep('step2', this.time);
+
+    this.mainRouter.navigate('step_3/ranking');
   }
 }
