@@ -99,27 +99,7 @@ export default class LuzzuApiService {
   getResults( requestObj ) {
     //http://irc-eval.adaptcentre.ie/framework-apis/v4/irc-evaluation/rank/weighted/
     let endpoint = 'framework-apis/v4/irc-evaluation/rank/weighted/';
-    
-    if(!requestObj) {
-      requestObj = [
-        {
-            "type":"dimension",
-            "uri":"http://purl.org/eis/vocab/dqm#Interoperability",
-            "weight": "0.2692"
-        },
-        {
-            "type":"dimension",
-            "uri":"http://purl.org/eis/vocab/dqm#Licensing",
-            "weight": "0.2471"
-        },
-        {
-            "type": "dimension",
-            "uri": "http://github.io/jerdeb/lsqm#TrustworthinessDimension",
-            "weight": "0.4837"
-        }
-      ];
-    }
-    
+        
     return this.httpClient.fetch(endpoint, { 
       method: 'post',
       body: json( requestObj ) 

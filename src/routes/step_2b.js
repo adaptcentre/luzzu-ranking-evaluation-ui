@@ -45,9 +45,11 @@ export class Step_2b {
   
   activate() {
 
-    // get standard result data
+    let requestObj = this.dataStore.createResultRequestObject( this.dataStore.getRanking() );
+    
+    // get result data
     let p1 = new Promise( (resolve, reject) => {
-      this.luzzuApiService.getResults()
+      this.luzzuApiService.getResults(requestObj)
       .then( (resultData) => {
         this.dataStore.setResults( resultData );
         resolve();

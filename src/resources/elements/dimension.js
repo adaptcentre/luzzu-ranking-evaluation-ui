@@ -32,6 +32,7 @@ export class Dimension {
       onFinish: (data) => {
         console.log( `Dimension: ${this.dimension.name} value changed from ${this.dimension.value} to ${data.from}` );
         this.dimension.value = data.from;
+        this.change();
       }
     });
 
@@ -48,6 +49,15 @@ export class Dimension {
     
     let event = new CustomEvent('remove-dimension', { 
       detail: this.dimension.name,
+      bubbles: true
+    });
+
+    this.element.dispatchEvent(event);
+  }
+
+  change() {
+    let event = new CustomEvent('change-dimension', {
+      detail: JSON.parse( JSON.stringify( this.dimension ) ),
       bubbles: true
     });
 

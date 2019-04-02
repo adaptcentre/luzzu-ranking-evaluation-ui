@@ -5,7 +5,14 @@
   <loading-component if.bind="loading"></loading-component>
 
   <require from="../resources/elements/dimension"></require>
-  <dimension class="row pt-3" repeat.for="dimension of parent.ranking" dimension.bind="dimension" readonly.one-way="false" remove-dimension.delegate="parent.removeDimensionFromRanking($event)"></dimension>
+  <dimension 
+    class="row pt-3" 
+    repeat.for="dimension of parent.ranking" 
+    dimension.bind="dimension" 
+    readonly.one-way="false" 
+    remove-dimension.delegate="parent.removeDimensionFromRanking($event)"
+    change-dimension.delegate="parent.changeDimension($event)">
+  </dimension>
 
 
   <div class="row pointer">

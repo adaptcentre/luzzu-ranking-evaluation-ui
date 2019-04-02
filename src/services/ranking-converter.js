@@ -5,30 +5,39 @@ import * as d3 from 'd3';
 
 export default class RankingConverter {
   
-  constructor() {
-    /*
-      var x = d3.scaleLinear()
-        .domain([-1, 1])
-        .range([0, 960]);
-    */
+  convertIncomming( dimensions ) {
+
+    for ( let dimension of dimensions ) {
+      dimension.value = dimension.apiValue * 100
+    }
   }
 
-  convertIncomming( metrics ) {
+  convertOutgoing( dimensions ) {
 
-    let max = d3.max( metrics.map( el => { return el.apiValue; } ) );
+    for( let dimension of dimensions ) {
+      dimension.apiValue = dimension.value / 100;
+    }
+  }
+}
+
+/*
+BACK UP FROM PREVIOUS VERSION
+convertIncomming( dimensions ) {
+
+    let max = d3.max( dimensions.map( el => { return el.apiValue; } ) );
 
     let scale = d3.scaleLinear()
       .domain([0, max])
       .range([0, 100]);
 
-    for ( let metric of metrics ) {
-      metric.value = scale(metric.apiValue)
+    for ( let dimension of dimensions ) {
+      dimension.value = scale(dimension.apiValue)
     }
   }
 
-  convertOutgoing( metrics ) {
+  convertOutgoing( dimensions ) {
 
-    let total = metrics.reduce( (total, el) => {
+    let total = dimensions.reduce( (total, el) => {
       return total + parseFloat(el.value);
     }, 0);
     
@@ -36,9 +45,8 @@ export default class RankingConverter {
       .domain([0, total])
       .range([0, 1]);
 
-    for( let metric of metrics ) {
-      metric.apiValue = scale( metric.value );
+    for( let dimension of dimensions ) {
+      dimension.apiValue = scale( dimension.value );
     }
   }
-
-}
+*/
