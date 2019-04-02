@@ -20,25 +20,11 @@
       </div>
     </div>
 
-    <!-- Ranking/Results Navigation-->
     <div class="row mt-5">
       <div class="col-12">
-        <ul class="nav nav-tabs nav-fill">
-          <li class="nav-item">
-            <a class="nav-link ${childRouter.currentInstruction.fragment === 'ranking' ? 'active' : ''}" href="#/step_2/ranking">Ranking</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link ${childRouter.currentInstruction.fragment === 'results' ? 'active' : ''}" href="#/step_2/results">Results</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Router View -->
-    <div class="row">
-      <div class="col-12">
-        <div class="container border-left border-right border-bottom pb-3">
-          <router-view></router-view>
+        <div class="container border pb-3">
+          <require from="../resources/elements/result"></require>
+          <result class="row pt-3" repeat.for="result of results" result.bind="result"></result>      
         </div>
       </div>
     </div>

@@ -14,7 +14,7 @@ import { isNull } from 'util';
 // this.router.currentInstruction.fragment === 'ranking
 // ${router.currentInstruction.fragment === ''ranking ? 'active' : ''}
 
-export class Step_2 {
+export class Step_2a {
 	
 	constructor(Router, LuzzuApiService, MongoStitchApiService, DataStore) {
     
@@ -44,16 +44,6 @@ export class Step_2 {
       end: null
     }
   }
-
-  configureRouter(config, router, params) {
-  		
-		config.map([
-			{ route: ['','ranking'],   name: 'ranking',  moduleId: PLATFORM.moduleName( 'routes/step_2-ranking') },
-			{ route: 'results',   name: 'results',  moduleId: PLATFORM.moduleName( 'routes/step_2-results') }
-    ]);
-    
-    this.childRouter = router;
-	}
   
   activate() {
 
@@ -65,58 +55,14 @@ export class Step_2 {
           resolve();
         });
     });
-
-    // get dimension data - need this for descriptios
-    let p2 = new Promise( (resolve, reject) => {
-      this.luzzuApiService.getDimensions()
-      .then( (dimensionData) => {
-        this.dataStore.setDimensions( dimensionData );
-        resolve();
-      });
-    });
     
-    // get standard result data
-    let p3 = new Promise( (resolve, reject) => {
-      this.luzzuApiService.getResults()
-      .then( (resultData) => {
-        this.dataStore.setResults( resultData );
-        resolve();
-      });
-    });
-
-    let p4 = new Promise( (resolve, reject) => {
-      this.mongoStitchApiService.initSession().then( (participant_id) => {
-        this.dataStore.setParticipantId( participant_id );
-        resolve();
-      })
-    });
-    
-    
-    return Promise.all([p1, p2, p3, p4]);
+    return p1;
   }
 
 	attached() {
     this.loading = false;
-
     this.ranking = this.dataStore.getRanking();
-    this.results = this.dataStore.getResults();
-
     this.time.start = Date.now();
-  }
-
-  changedSubView( from ) {
-    console.log('changed subview');
-    
-    let time = Date.now();
-    let output = '';
-
-    if(from === 'ranking') {
-      output = 'ranking to results';
-    } else {
-      output = 'results to ranking';
-    }
-
-    this.dataStore.changedSubView('step2', { from: output, time: time  });
   }
   
 	next() {
@@ -124,9 +70,9 @@ export class Step_2 {
 
     this.time.end = Date.now();
     
-    this.dataStore.addQuestion('step2', JSON.parse( JSON.stringify(this.question) ) );
-    this.dataStore.updateStep('step2', this.time);
+    this.dataStore.addQuestion('step2a', JSON.parse( JSON.stringify(this.question) ) );
+    this.dataStore.updateStep('step2a', this.time);
 
-    this.mainRouter.navigate('step_3/ranking');
+    this.mainRouter.navigate('step_2b');
   }
 }

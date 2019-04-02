@@ -6,5 +6,9 @@
 	"two": {
 		"header": "Question header",
 		"text": "Lorem ipsum dolor, sit amet consectetur adipisicing elit?"
+	},
+	"three": {
+		"header": "Question header",
+		"text": "Lorem ipsum dolor, sit amet consectetur adipisicing elit?"
 	}
 }

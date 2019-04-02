@@ -29,8 +29,8 @@ export class Step_3 {
     let tempQ = JSON.parse(questions);
 
     this.question = {
-      header: tempQ['two'].header,
-      text: tempQ['two'].text,
+      header: tempQ['three'].header,
+      text: tempQ['three'].text,
       answer: null,
       disabled: true
     }

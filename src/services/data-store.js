@@ -20,10 +20,15 @@ export default class DataStore {
       step1: {
         time: { start: null, end: null }
       },
-      step2: {
+      step2a: {
         time: { start: null, end: null },
-        views: [],
-        question: null
+        question: null,
+        ranking: null
+      },
+      step2b: {
+        time: { start: null, end: null },
+        question: null,
+        results: null
       },
       step3: {
         time: { start: null, end: null },
