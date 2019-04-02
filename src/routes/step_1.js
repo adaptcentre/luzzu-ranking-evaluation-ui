@@ -1,8 +1,8 @@
 import {inject} from 'aurelia-framework';
 import {Router} from 'aurelia-router';
 
-import evaluationDesc from 'raw-loader!../../static/evaluation-desc.txt';
-import consentFormHTML from 'raw-loader!../../static/consentform.txt';
+import evaluationDesc from 'raw-loader!../../static/content/evaluation-desc.txt';
+import consentFormHTML from 'raw-loader!../../static/content/consentform.txt';
 
 import DataStore from '../services/data-store.js';
 

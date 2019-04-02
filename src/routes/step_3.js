@@ -5,8 +5,8 @@ import DataStore from '../services/data-store.js';
 import LuzzuApiService from '../services/luzzu-api-service.js';
 import MongoStitchApiService from '../services/mongo-stitch-api-service.js';
 
-import taskDesc from 'raw-loader!../../static/task-2-desc.txt';
-import questions from 'raw-loader!../../static/questions.txt';
+import taskDesc from 'raw-loader!../../static/content/task-2-desc.txt';
+import questions from 'raw-loader!../../static/content/questions.txt';
 
 @inject(Router, LuzzuApiService, DataStore, MongoStitchApiService)
 
@@ -117,10 +117,10 @@ export class Step_3 {
 
   removeDimensionFromRanking(event) {
 
-    let id = event.detail;
+    let name = event.detail;
 
     let index = this.ranking.findIndex( (el) => {
-      return el.id === id;
+      return el.name === name;
     });
   
     this.ranking.splice(index, 1);
