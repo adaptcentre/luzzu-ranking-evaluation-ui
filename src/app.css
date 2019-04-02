@@ -37,3 +37,8 @@
 .no-select {
   user-select: none;
 }
+
+
+.irs-disabled {
+  opacity: .7 !important;
+}

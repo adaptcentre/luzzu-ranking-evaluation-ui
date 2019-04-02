@@ -1,5 +1,4 @@
 import {PLATFORM} from 'aurelia-pal';
-
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/js/all'
@@ -7,10 +6,6 @@ import 'app.css';
 
 export class App {
   
-  constructor() {
-    this.message = 'Hello World!';
-  }
-
   configureRouter(config, router) {
 		this.router = router;
 		
