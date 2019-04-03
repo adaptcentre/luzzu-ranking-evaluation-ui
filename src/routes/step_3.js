@@ -4,19 +4,21 @@ import {Router} from 'aurelia-router';
 import DataStore from '../services/data-store.js';
 import LuzzuApiService from '../services/luzzu-api-service.js';
 import MongoStitchApiService from '../services/mongo-stitch-api-service.js';
+import {EventAggregator} from 'aurelia-event-aggregator';
 
 import taskDesc from 'raw-loader!../../static/content/task-2-desc.txt';
 import questions from 'raw-loader!../../static/content/questions.txt';
 
-@inject(Router, LuzzuApiService, DataStore, MongoStitchApiService)
+@inject(Router, LuzzuApiService, DataStore, MongoStitchApiService, EventAggregator)
 
 export class Step_3 {
 	
-	constructor(Router, LuzzuApiService, DataStore, MongoStitchApiService) {
+	constructor(Router, LuzzuApiService, DataStore, MongoStitchApiService, EventAggregator) {
     this.mainRouter = Router;
     this.luzzuApiService = LuzzuApiService;
     this.mongoStitchApiService = MongoStitchApiService;
     this.dataStore = DataStore;
+    this.eventAggregator = EventAggregator;
     
     this.loading = true;
 
@@ -58,16 +60,17 @@ export class Step_3 {
       and to get al list of all possible dimensions a user can add
     */
 
+    // get ranking from API
     let p1 = new Promise( (resolve, reject) => {
 
       this.luzzuApiService.getRanking()
         .then( (rankingData) => {
-      
           this.dataStore.setRanking( rankingData );
           resolve();
         });
     });
 
+    // get dimension data from API
     let p2 = new Promise( (resolve, reject) => {
       this.luzzuApiService.getDimensions()
       .then( (dimensionsData) => {
@@ -81,75 +84,65 @@ export class Step_3 {
 
 	attached() {
     this.reset();
+    
     this.loading = false;
     this.time.start = Date.now();
-
-    /*
-    setTimeout( () => {
-      for(let dim of this.ranking) {
-        dim.value = 0;
-      }
-
-      let temp = JSON.parse( JSON.stringify( this.ranking ) );
-      this.ranking = temp;
-      console.log(this.ranking)
-    }, 10000)
-    */
   }
   
 
   changeDimension(event) {
-    console.log('dimensions have changed');
+    //console.log('dimensions have changed');
 
     let changedDim = event.detail;
 
-    console.log(changedDim);
-    /*
-    let total = 0;
-    for( let ranking of this.ranking ) {
-      total += ranking.value;
-    }
+    //console.log(changedDim);
+    //console.log(this.ranking)
 
-    console.log('total', total)
-    
-    let difference = 100 - total;
-    console.log('diff', difference);
+    let currentTotal = this.ranking.reduce( (accumulator, currentElement) => {
+      return accumulator + currentElement.value;
+    }, 0);
 
-    let remainingDims = this.ranking.filter( (el) => {
+    let difference = 1 - currentTotal;
+    //console.log('total:', currentTotal, 'difference:', difference);
+
+    let toAddToEachDim = difference / (this.ranking.length - 1);
+    //console.log('have to add this to each:', toAddToEachDim);
+
+    let filteredAndSorted = this.ranking.filter( (el) => {
       return el.name !== changedDim.name;
-    });
-
-    remainingDims.sort( (a,b) => {
+    })
+    .sort( (a, b) => {
       return a.value - b.value;
     });
 
-    let splitDiff = difference / remainingDims.length;
-    console.log('splitDiff', splitDiff);
-    let toMod = splitDiff;
-    for( let remainingDim of remainingDims ) {
-      let res = remainingDim.value + toMod;
+    //console.table(filteredAndSorted)
 
-      if(res < 0) {
-        console.log('carry to next')
-        toMod += res;
-        remainingDim.value = 0;
-        console.log('reset to 0:', remainingDim.name);
+    let runningValue = toAddToEachDim;
+
+    for( let dim of filteredAndSorted ) {
+      let toCarry = 0;
+
+      if(dim.value + runningValue < 0) {
+        toCarry += dim.value + runningValue
+        dim.value = 0;
       } else {
-        remainingDim.value += toMod
-        console.log('adding', toMod, 'to:', remainingDim.name);
+        dim.value += runningValue;
       }
-      toMod += splitDiff;
+      runningValue = toAddToEachDim + toCarry;
     }
 
-    this.ranking = JSON.parse( JSON.stringify( this.ranking) );
+    
+    this.eventAggregator.publish('dimension-update-value', {});
 
-    let tt = 0;
-    for(let r of this.ranking) {
-      console.log(r.value)
-      tt += r.value
-    }
-    console.log('--\n', tt);
-    */
+    // DEBUG OUTPUT START!
+    let newTotal = this.ranking.reduce( (accumulator, currentElement) => {
+      return accumulator + currentElement.value;
+    }, 0);
+
+    let dubugOutput = JSON.parse( JSON.stringify( this.ranking ) );
+    dubugOutput.push( { name: 'TOTAL', value: newTotal } )
+    console.table( dubugOutput );
+    // DEBUG OUTPUT END
   }
 
   openModal() {
@@ -184,8 +177,19 @@ export class Step_3 {
     let index = this.ranking.findIndex( (el) => {
       return el.name === name;
     });
-  
-    this.ranking.splice(index, 1);
+    
+    let removed = this.ranking.splice(index, 1);
+
+    if(removed.length > 0) {
+      console.log( 'Removed', removed[0].name, 'from ranking!' );
+
+      // DEBUG OUTPUT START!
+      let dubugOutput = JSON.parse( JSON.stringify( this.ranking ) );
+      console.table( dubugOutput );
+      // DEBUG OUTPUT END
+    }
+    
+    this.dimensions = this.filterDimensions( this.dataStore.getDimensions() );
   }
 
   addDimensionsToRanking(event) {
@@ -206,6 +210,14 @@ export class Step_3 {
   reset() {
     this.ranking = this.dataStore.getRanking();
     this.dimensions = this.filterDimensions( this.dataStore.getDimensions() );
+
+    // DEBUG OUTPUT START!
+    console.log('RANKING AND DIMENSIONS RESET');
+    console.log('DIMENSIONS');
+    console.table( JSON.parse( JSON.stringify( this.dimensions ) ) );
+    console.log('RANKING');
+    console.table( JSON.parse( JSON.stringify( this.ranking ) ) );
+    // DEBUG OUTPUT END!
   }
 
   // need this so we cannot add the same ones twice
@@ -239,11 +251,20 @@ export class Step_3 {
     this.dataStore.updateStep('step3', this.time);
 
     let userData = this.dataStore.getUserData();
+    
+    // DEBUG START
+    console.log('\n\n SENDING STUFF TO DB');
+    console.table( JSON.parse( JSON.stringify(this.ranking) ) );
+    console.log('\n\n');
+    // DEBUG END
+
     //we need to send data to DB before we move on
     this.mongoStitchApiService.sendResults(userData).then( (results) => {
-      //this.dataStore.setParticipantId( participant_id );
+      
       this.mainRouter.navigateToRoute('step_4');
-    })
+    });
+
+    //also need to send data to LUZZU API to update RANKING?
     
 	}
 }

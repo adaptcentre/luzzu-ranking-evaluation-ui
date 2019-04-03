@@ -6,13 +6,12 @@ import RankingConverter from './ranking-converter.js';
 // https://github.com/github/fetch
 // https://aurelia.io/docs/plugins/http-services#aurelia-fetch-client
 
-@inject(HttpClient, RankingConverter)
+@inject(HttpClient)
 
 export default class LuzzuApiService {
   
-  constructor(HttpClient, RankingConverter) {
+  constructor(HttpClient) {
     this.httpClient = HttpClient;
-    this.converter = RankingConverter;
 
     this.httpClient.configure( config => {
       config
@@ -49,11 +48,13 @@ export default class LuzzuApiService {
       let output = [];
 
       for(let [key, value] of Object.entries(data) ) {
-        output.push( { name: key, apiValue: value, value: 0 } );
+        output.push( { name: key, value: value } );
       }
-
-      this.converter.convertIncomming( output ); //might need to move this
-
+      console.log('\n---------------');
+      console.log('Got ranking from API');
+      console.table(output);
+      console.log('---------------\n');
+      
       return output;
     })
     .catch( (err) => {

@@ -5,10 +5,8 @@ import RankingConverter from './ranking-converter.js';
 
 export default class DataStore {
 
-  constructor(RankingConverter) {
+  constructor() {
     
-    this.converter = RankingConverter;
-
     this.ranking = [];
     this.results = [];
     this.dimensions = [];
@@ -59,7 +57,15 @@ export default class DataStore {
   }
 
   getDimensions() {
-    return JSON.parse( JSON.stringify( this.dimensions ) );
+    let output = JSON.parse( JSON.stringify( this.dimensions ) );
+
+    output.sort( (a,b) => {
+      if(a.name.toLowerCase() < b.name.toLowerCase()) { return -1; }
+      if(a.name.toLowerCase() > b.name.toLowerCase()) { return 1; }
+      return 0;
+    });
+    
+    return output;
   }
 
   getDimensionsDesc( name ) {
@@ -73,16 +79,14 @@ export default class DataStore {
   createResultRequestObject( ranking ) {
     
     ranking = ranking || this.ranking;
-    //first convert value to api value
-    this.converter.convertOutgoing( ranking );
-
+    
     let result = [];
     
     for( let dimension of ranking ) {
       result.push({
         type: 'dimension',
         uri: this.getDimensionURI( dimension.name ),
-        weight: dimension.apiValue.toString()
+        weight: dimension.value.toString()
       });
     }
 
@@ -97,6 +101,8 @@ export default class DataStore {
       return this.dimensions[res].uri;
     }
   }
+
+  //--------
 
   setParticipantId( id ) {
     this.userData.id = id;
