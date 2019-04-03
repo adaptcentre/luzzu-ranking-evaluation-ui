@@ -11,7 +11,7 @@
       class="row pt-3" 
       repeat.for="dimension of parent.ranking" 
       dimension.bind="dimension" 
-      readonly.one-way="false" 
+      readonly.to-view="false" 
       remove-dimension.delegate="parent.removeDimensionFromRanking($event)"
       change-dimension.delegate="parent.changeDimension($event)">
     </dimension>

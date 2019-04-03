@@ -1,27 +1,29 @@
 import {inject} from 'aurelia-framework';
 import {Router} from 'aurelia-router';
-import DataStore from '../services/data-store.js';
+import SinglePass from '../services/single-pass.js';
 
-@inject(Router, DataStore)
+@inject(Router, SinglePass)
 
 export class Step_4 {
 	
-	constructor(Router, DataStore) {
+	constructor(Router, SinglePass) {
 		this.router = Router;
 		this.loading = true;
-		this.dataStore = DataStore;
+
+		this.singlePass = SinglePass;
 	}
 
 	activate( params ) {
-		this.results = this.dataStore.getResults();
+
+		// if we did not come from step 1 then naviagte back to step 1 to force reload
+    if( !this.singlePass.checkLastEntry('step_3') ) {
+			this.mainRouter.navigate('step_1');
+    }
+
+		this.singlePass.add('step_4');
 	}
 
 	attached() {
 		this.loading = false;
-	}
-
-	next() {
-		this.loading = true;
-		this.router.navigateToRoute('step_5', { from: 'step_4' } );
 	}
 }

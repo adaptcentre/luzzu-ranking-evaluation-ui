@@ -4,21 +4,23 @@ import {Router} from 'aurelia-router';
 import DataStore from '../services/data-store.js';
 import LuzzuApiService from '../services/luzzu-api-service.js';
 import MongoStitchApiService from '../services/mongo-stitch-api-service.js';
+import SinglePass from '../services/single-pass.js';
 
 import taskDesc from 'raw-loader!../../static/content/task-1-desc.txt';
 import questions from 'raw-loader!../../static/content/questions.txt';
-import { isNull } from 'util';
 
-@inject(Router, LuzzuApiService, MongoStitchApiService, DataStore)
+
+@inject(Router, LuzzuApiService, MongoStitchApiService, DataStore, SinglePass)
 
 export class Step_2b {
 	
-	constructor(Router, LuzzuApiService, MongoStitchApiService, DataStore) {
+	constructor(Router, LuzzuApiService, MongoStitchApiService, DataStore, SinglePass) {
     
     this.mainRouter = Router;
     this.luzzuApiService = LuzzuApiService;
     this.mongoStitchApiService = MongoStitchApiService;
     this.dataStore = DataStore;
+    this.singlePass = SinglePass;
     
     this.loading = true;
 
@@ -44,6 +46,13 @@ export class Step_2b {
 
   
   activate() {
+
+    // if we did not come from step 1 then naviagte back to step 1 to force reload
+    if( !this.singlePass.checkLastEntry('step_2a') ) {
+			this.mainRouter.navigate('step_1');
+    }
+
+    this.singlePass.add('step_2b');
 
     let requestObj = this.dataStore.createResultRequestObject( this.dataStore.getRanking() );
     

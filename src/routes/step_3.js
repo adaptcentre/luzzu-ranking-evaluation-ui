@@ -4,21 +4,23 @@ import {Router} from 'aurelia-router';
 import DataStore from '../services/data-store.js';
 import LuzzuApiService from '../services/luzzu-api-service.js';
 import MongoStitchApiService from '../services/mongo-stitch-api-service.js';
+import SinglePass from '../services/single-pass.js';
 import {EventAggregator} from 'aurelia-event-aggregator';
 
 import taskDesc from 'raw-loader!../../static/content/task-2-desc.txt';
 import questions from 'raw-loader!../../static/content/questions.txt';
 
-@inject(Router, LuzzuApiService, DataStore, MongoStitchApiService, EventAggregator)
+@inject(Router, LuzzuApiService, DataStore, MongoStitchApiService, EventAggregator, SinglePass)
 
 export class Step_3 {
 	
-	constructor(Router, LuzzuApiService, DataStore, MongoStitchApiService, EventAggregator) {
+	constructor(Router, LuzzuApiService, DataStore, MongoStitchApiService, EventAggregator, SinglePass) {
     this.mainRouter = Router;
     this.luzzuApiService = LuzzuApiService;
     this.mongoStitchApiService = MongoStitchApiService;
     this.dataStore = DataStore;
     this.eventAggregator = EventAggregator;
+    this.singlePass = SinglePass;
     
     this.loading = true;
 
@@ -55,6 +57,12 @@ export class Step_3 {
   
   
   activate() {
+    // if we did not come from step 1 then naviagte back to step 1 to force reload
+    if( !this.singlePass.checkLastEntry('step_2b') ) {
+			this.mainRouter.navigate('step_1');
+    }
+
+    this.singlePass.add('step_3');
     /* 
       Here we need to make some api calls to get the ranking data
       and to get al list of all possible dimensions a user can add
