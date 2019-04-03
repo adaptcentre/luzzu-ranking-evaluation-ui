@@ -5,6 +5,7 @@ import DataStore from '../services/data-store.js';
 import LuzzuApiService from '../services/luzzu-api-service.js';
 import MongoStitchApiService from '../services/mongo-stitch-api-service.js';
 import SinglePass from '../services/single-pass.js';
+import {chunk} from '../helpers/array.js';
 
 import taskDesc from 'raw-loader!../../static/content/task-1-desc.txt';
 import questions from 'raw-loader!../../static/content/questions.txt';
@@ -26,6 +27,8 @@ export class Step_2b {
 
     this.ranking = [];
     this.results = [];
+    this.resultSet = [];
+    this.resultSetIndex = 0;
 
     this.taskDesc = taskDesc;
 
@@ -72,6 +75,7 @@ export class Step_2b {
     this.loading = false;
 
     this.results = this.dataStore.getResults();
+    this.resultSet = chunk(this.results, 6);
 
     this.time.start = Date.now();
   }
@@ -85,5 +89,19 @@ export class Step_2b {
     this.dataStore.updateStep('step2b', this.time);
 
     this.mainRouter.navigate('step_3/ranking');
+  }
+
+  // --
+
+  paginationNext($event) {
+    //not used atm
+  }
+
+  paginationPrevious($event) {
+    //not used atm
+  }
+
+  paginationChange($event) {
+    //not used atm
   }
 }
