@@ -1,3 +1,0 @@
-<p>
-  Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit doloribus voluptatem commodi dolorem nisi architecto pariatur quis iste ex dolore ut perferendis accusamus exercitationem animi, eveniet esse dolorum laudantium ipsa. Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit doloribus voluptatem commodi dolorem nisi architecto pariatur quis iste ex dolore ut perferendis accusamus exercitationem animi, eveniet esse dolorum laudantium ipsa.
-</p>

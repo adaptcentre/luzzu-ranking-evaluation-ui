@@ -1,7 +1,7 @@
 import {inject} from 'aurelia-framework';
 import {Router} from 'aurelia-router';
 
-import evaluationDesc from 'raw-loader!../../static/content/evaluation-desc.txt';
+import stepDescription from 'raw-loader!../../static/content/step-1-description.txt';
 import consentFormHTML from 'raw-loader!../../static/content/consentform.txt';
 
 import DataStore from '../services/data-store.js';
@@ -23,19 +23,14 @@ export class Step_1 {
 		this.dataStore = DataStore;
 		this.singlePass = SinglePass;
 
+		this.stepDescription = stepDescription;
 		this.consentFormHTML = consentFormHTML;
-		this.evaluationDesc = evaluationDesc;
 
-		this.time = {
-			start: null,
-			end: null
-		}
 	}
 
 	activate() {
 
 		if( !this.singlePass.checkLastEntry('init') ) {
-			console.log( 'should reload' );
 			location.reload();
 		}
 
@@ -43,19 +38,17 @@ export class Step_1 {
 	}
 
 	attached() {
+		window.scrollTo(0,0);
 		this.loading = false;
-
-		this.time.start = Date.now();
-		this.dataStore.setUserDataTimeStart();
 	}
 
 	next() {
 		this.loading = true;
-		//this.router.navigateToRoute('ranking');
 
-		this.time.end = Date.now();
-		this.dataStore.updateStep('step1', this.time);
+		console.log( '\n\n\n ---------- ----------' );
+    console.log( 'Proceeding to next step (step 1 -> step 2)' );
+    console.log( '---------- ---------- \n\n\n' );
 
-		this.router.navigate('step_2a');
+		this.router.navigate('step_2');
 	}
 }

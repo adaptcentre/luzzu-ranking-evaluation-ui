@@ -6,15 +6,10 @@
       
       <!-- HEADER -->
       <div class="row bg-light rounded pt-2">
-        <div class="col-10">
+        <div class="col-12">
           <h4>
             ${dimension.name}
           </h4>
-        </div>
-        <div class="col-2">
-          <h3 class="text-right" click.delegate="remove()" if.bind="!readonly">
-            <i class="fas fa-times pointer"></i>
-          </h3>
         </div>
       </div>
 
@@ -26,7 +21,7 @@
         </div>
         <div class="col-6">
             <p class="font-weight-light">
-              ${ getDesc() }
+              ${ dimension.desc }
             </p>
         </div>
       </div>

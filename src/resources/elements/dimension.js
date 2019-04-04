@@ -20,9 +20,6 @@ export class Dimension {
   } 
 
   attached() {
-    //onFinish
-    console.log('dimensions component attached');
-    // 1. Initialise range slider instance
     let el = $(this.element).find(".js-range-slider");
 
     el.ionRangeSlider({
@@ -55,12 +52,6 @@ export class Dimension {
     for(let sub of this.subscriptions) {
       sub.dispose();
     }
-  }
-
-  getDesc() {
-    let desc = this.dataStore.getDimensionsDesc( this.dimension.name );
-    
-    return desc;
   }
 
   remove() {

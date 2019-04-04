@@ -12,11 +12,11 @@ export class App {
 	  config.title = 'Evaluation';
 
 	  config.map([
-			{ route: ['', 'step_1'],   name: 'step_1',    moduleId: PLATFORM.moduleName( 'routes/step_1'),   nav: true },
-			{ route: 'step_2a',        name: 'step_2a',    moduleId: PLATFORM.moduleName( 'routes/step_2a'),   nav: true },
-			{ route: 'step_2b',        name: 'step_2b',    moduleId: PLATFORM.moduleName( 'routes/step_2b'),   nav: true },
-			{ route: 'step_3',         name: 'step_3',    moduleId: PLATFORM.moduleName( 'routes/step_3'),   nav: true },
-			{ route: 'step_4',         name: 'step_4',    moduleId: PLATFORM.moduleName( 'routes/step_4'),   nav: true }
+			{ route: '',         redirect: 'step_1' },
+			{ route: 'step_1',   name: 'step_1',    moduleId: PLATFORM.moduleName( 'routes/step_1'),   nav: true },
+			{ route: 'step_2',   name: 'step_2',    moduleId: PLATFORM.moduleName( 'routes/step_2'),   nav: true },
+			{ route: 'step_3',   name: 'step_3',    moduleId: PLATFORM.moduleName( 'routes/step_3'),   nav: true },
+			{ route: 'step_4',   name: 'step_4',    moduleId: PLATFORM.moduleName( 'routes/step_4'),   nav: true }
 	  ]);
 	}
 }

@@ -8,57 +8,38 @@ export default class DataStore {
   constructor() {
     
     this.ranking = [];
-    this.results = [];
     this.dimensions = [];
+    this.userSelectedDimensions = [];
+  }
 
-    // @toDo
-    this.userData = {
-      id: null,
-      time: { start: null, end: null },
-      step1: {
-        time: { start: null, end: null }
-      },
-      step2a: {
-        time: { start: null, end: null },
-        question: null,
-        ranking: null
-      },
-      step2b: {
-        time: { start: null, end: null },
-        question: null,
-        results: null
-      },
-      step3: {
-        time: { start: null, end: null },
-        views: [],
-        question: null
-      }
-    }
+  clone(obj) {
+    return JSON.parse( JSON.stringify( obj ) );
   }
 
   setRanking( ranking ) {
-    this.ranking = ranking;
+    this.ranking = this.clone( ranking );
   }
 
   getRanking() {
-    return JSON.parse( JSON.stringify( this.ranking ) );
+    return this.clone( this.ranking );
   }
 
   setResults( results ) {
-    this.results = results;
+    this.results = this.clone( results );
   }
 
   getResults() {
-    return JSON.parse( JSON.stringify( this.results ) );
+    return this.clone( this.results );
   }
 
-  setDimensions( dimensionsData ) {
-    this.dimensions = dimensionsData;
+  setDimensions( dimensions ) {
+    this.dimensions = this.clone( dimensions );
   }
 
   getDimensions() {
-    let output = JSON.parse( JSON.stringify( this.dimensions ) );
+    let output = this.clone( this.dimensions );
 
+    //sort them alphabetically
     output.sort( (a,b) => {
       if(a.name.toLowerCase() < b.name.toLowerCase()) { return -1; }
       if(a.name.toLowerCase() > b.name.toLowerCase()) { return 1; }
@@ -68,12 +49,12 @@ export default class DataStore {
     return output;
   }
 
-  getDimensionsDesc( name ) {
-    let res = this.dimensions.findIndex( (el) => { return el.name === name; } );
+  setUserSelectedDimensions( userSelectedDimensions ) {
+    this.userSelectedDimensions = this.clone( userSelectedDimensions );
+  }
   
-    if(res !== -1) {
-      return this.dimensions[res].desc;
-    }
+  getUserSelectedDimensions() {
+    return this.clone( this.userSelectedDimensions );
   }
 
   createResultRequestObject( ranking ) {
@@ -101,6 +82,9 @@ export default class DataStore {
       return this.dimensions[res].uri;
     }
   }
+
+
+
 
   //--------
 

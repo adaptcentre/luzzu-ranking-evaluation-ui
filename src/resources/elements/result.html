@@ -2,22 +2,21 @@
 
     <div class="col-12">
   
-      <div class="container border border-dark rounded">
+      <div class="container border border-dark rounded ${result.selected ? 'bg-dark text-white' : ''} no-user-select"
+      click.delegate="selectResult()">
         
         <!-- HEADER -->
-        <div class="row bg-light rounded pt-2">
-          <div class="col-12">
+        <div class="row ${result.selected ? '' : 'bg-light'} rounded pt-2">
+          <div class="col-10">
             <h4>
               ${ result.Title }
             </h4>
           </div>
-          <!-- 
-          <div class="col-6">
-            <h4 class="text-right">
-              ${ rankValue }
-            </h4>
-          </div>
-          -->
+          <div class="col-2">
+              <h4 class="text-right ${result.selected ? 'text-success' : ''}" show.bind="result.selected" >
+                <i class="fas fa-check"></i>
+              </h4>
+            </div>
         </div>
   
         <!-- BODY -->

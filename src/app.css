@@ -34,7 +34,7 @@
   cursor: pointer;
 }
 
-.no-select {
+.no-user-select {
   user-select: none;
 }
 

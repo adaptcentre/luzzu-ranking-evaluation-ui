@@ -81,14 +81,20 @@ export default class LuzzuApiService {
 
       for( let category of data.Categories ) {
         for( let dimension of category.Dimensions) {
+
+          // requirement to skip this one!
+          if( dimension.Label === 'Volume') {
+            continue;
+          }
+
           output.push({
             name: dimension.Label,
             desc: dimension.Comment,
             uri: dimension.URI
-          })
+          });
         }
       }
-
+      
       return output;
     })
     .catch( (err) => {

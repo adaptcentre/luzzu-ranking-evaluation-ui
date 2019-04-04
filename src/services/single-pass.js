@@ -6,7 +6,7 @@ export default class SinglePass {
     this.history = [];
     this.history.push('init');
 
-    this.enabled = false;
+    this.enabled = true;
   }
 
   add(place) {
