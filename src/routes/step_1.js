@@ -2,7 +2,7 @@ import {inject} from 'aurelia-framework';
 import {Router} from 'aurelia-router';
 
 import stepDescription from 'raw-loader!../../static/content/step-1-description.txt';
-import consentFormHTML from 'raw-loader!../../static/content/consentform.txt';
+import consentFormHTML from 'raw-loader!../../static/content/consent-form.txt';
 
 import DataStore from '../services/data-store.js';
 import LuzzuApiService from '../services/luzzu-api-service.js';

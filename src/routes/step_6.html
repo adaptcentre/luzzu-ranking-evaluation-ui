@@ -1,0 +1,33 @@
+<template>
+
+    <!-- Loading Template -->
+    <require from="../resources/elements/loading.html"></require>
+    <loading if.bind="loading"></loading>
+  
+    <div else class="container my-5">
+      <div class="row"> 
+        <div class="col-12" innerhtml.bind="stepDescription">
+        </div>
+      </div>
+  
+      <div class="row mt-5">
+        <div class="col-12">
+          <div class="container border pb-3">
+            <require from="../resources/elements/result"></require>
+            <result class="row pt-3" repeat.for="result of results" result.bind="result">
+
+            </result>      
+          </div>
+        </div>
+      </div>
+  
+      <!-- Buttons -->
+      <div class="row mt-5">  
+        <div class="col-12">
+          <button type="button" class="btn btn-success btn-lg btn-block" click.delegate="next()"> Next </button>
+        </div>
+      </div>
+  
+    </div>
+  
+  </template>

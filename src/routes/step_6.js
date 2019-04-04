@@ -7,7 +7,7 @@ import MongoStitchApiService from '../services/mongo-stitch-api-service.js';
 import SinglePass from '../services/single-pass.js';
 import RankingConverter from '../services/ranking-converter.js';
 
-import stepDescription from 'raw-loader!../../static/content/step-4-description.txt';
+import stepDescription from 'raw-loader!../../static/content/step-6-description.txt';
 
 @inject(Router, LuzzuApiService, MongoStitchApiService, DataStore, SinglePass, RankingConverter)
 
@@ -31,17 +31,17 @@ export default class Step_4 {
   activate() {
 
     // if we did not come from step 1 then naviagte back to step 1 to force reload
-    if( !this.singlePass.checkLastEntry('step_3') ) {
+    if( !this.singlePass.checkLastEntry('step_5') ) {
       this.mainRouter.navigate('step_1');
       return;
     }
     
-    this.singlePass.add('step_4');
+    this.singlePass.add('step_6');
 
-    let userSelectedDimensions = this.dataStore.getUserSelectedDimensions();
-    userSelectedDimensions = this.rankingConverter.convertOutgoing( userSelectedDimensions );
+    let ranking = this.dataStore.getRanking();
+    ranking = this.rankingConverter.convertOutgoing( ranking );
 
-    let requestObj = this.dataStore.createResultRequestObject( userSelectedDimensions );
+    let requestObj = this.dataStore.createResultRequestObject( ranking );
     
     // get results
     let p1 = new Promise( (resolve, reject) => {
@@ -71,10 +71,10 @@ export default class Step_4 {
     let output = JSON.parse( JSON.stringify( this.results ) );
 
     console.log( '\n\n\n ---------- ----------' );
-    console.log( 'Proceeding to next step (step 3 -> step 4)' );
+    console.log( 'Proceeding to next step (step 6 -> step 7)' );
     console.table( JSON.parse( JSON.stringify( output ) ) );
     console.log( '---------- ---------- \n\n\n' );
     
-    this.mainRouter.navigate('step_5');
+    this.mainRouter.navigate('step_7');
   }
 }

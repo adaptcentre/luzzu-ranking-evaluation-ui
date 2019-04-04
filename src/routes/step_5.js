@@ -7,7 +7,7 @@ import MongoStitchApiService from '../services/mongo-stitch-api-service.js';
 import SinglePass from '../services/single-pass.js';
 
 
-import stepDescription from 'raw-loader!../../static/content/step-3-description.txt';
+import stepDescription from 'raw-loader!../../static/content/step-5-description.txt';
 
 
 @inject(Router, DataStore, LuzzuApiService, MongoStitchApiService, SinglePass)
