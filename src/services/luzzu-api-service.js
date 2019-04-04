@@ -106,6 +106,9 @@ export default class LuzzuApiService {
   getResults( requestObj ) {
     //http://irc-eval.adaptcentre.ie/framework-apis/v4/irc-evaluation/rank/weighted/
     let endpoint = 'framework-apis/v4/irc-evaluation/rank/weighted/';
+
+    console.log('Sending Request obj to API to get results');
+    console.table(requestObj);
         
     return this.httpClient.fetch(endpoint, { 
       method: 'post',

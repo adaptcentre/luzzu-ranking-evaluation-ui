@@ -83,7 +83,13 @@ export default class DataStore {
     }
   }
 
-
+  getDimensionDescription( name ) {
+    let res = this.dimensions.findIndex( (el) => { return el.name === name; } );
+  
+    if(res !== -1) {
+      return this.dimensions[res].desc;
+    }
+  }
 
 
   //--------

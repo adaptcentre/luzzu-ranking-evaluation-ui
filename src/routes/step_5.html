@@ -1,0 +1,34 @@
+<template>
+
+    <!-- Loading Template -->
+    <require from="../resources/elements/loading.html"></require>
+    <loading if.bind="loading"></loading>
+  
+    <!-- Non Loading Template -->
+    <!-- Had to remove else -> router view not working -->
+    <div else class="container my-5">
+      <div class="row"> 
+        <div class="col-12" innerhtml.bind="stepDescription">
+  
+        </div>
+      </div>
+  
+      <div class="row mt-5">
+        <div class="col-12">
+          <div class="container border pb-3">
+            <require from="../resources/elements/dimension"></require>
+            <dimension class="row pt-3" repeat.for="dimension of ranking" dimension.bind="dimension" readonly.one-way="true"></dimension>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Buttons -->
+      <div class="row mt-5">  
+        <div class="col-12">
+          <button type="button" class="btn btn-success btn-lg btn-block" click.delegate="next()"> Rank Datasets </button>
+        </div>
+      </div>
+  
+    </div>
+  
+  </template>

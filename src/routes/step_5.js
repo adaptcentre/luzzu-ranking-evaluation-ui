@@ -12,7 +12,7 @@ import stepDescription from 'raw-loader!../../static/content/step-3-description.
 
 @inject(Router, DataStore, LuzzuApiService, MongoStitchApiService, SinglePass)
 
-export class Step_3 {
+export class Step_5 {
 	
 	constructor(Router, DataStore, LuzzuApiService, MongoStitchApiService, SinglePass) {
 		this.router = Router;
@@ -29,34 +29,38 @@ export class Step_3 {
   }
   
   activate() {
-    if( !this.singlePass.checkLastEntry('step_2') ) {
+    if( !this.singlePass.checkLastEntry('step_4') ) {
       this.router.navigate('step_1');
       return;
 		}
 
-    this.singlePass.add('step_3');
+    this.singlePass.add('step_5');
   }
 
 	attached() {
     window.scrollTo(0,0);
     this.loading = false;
 
-    this.userSelectedDimensions = this.dataStore.getUserSelectedDimensions();
+    this.ranking = this.dataStore.getRanking().map( (el) => {
+      el.desc = this.getDimensionDescription( el.name );
+      return el;
+    });
   }
 
+  getDimensionDescription( name ) {
+    return this.dataStore.getDimensionDescription( name );
+  }
 
 	next() {
     this.loading = true;
     
-    this.dataStore.setUserSelectedDimensions( this.userSelectedDimensions );
-    
     console.log( '\n\n\n ---------- ----------' );
-    console.log( 'Proceeding to next step (step 3 -> step 4)' );
-    console.table( JSON.parse( JSON.stringify( this.userSelectedDimensions ) ) );
+    console.log( 'Proceeding to next step (step 4 -> step 5)' );
+    console.table( JSON.parse( JSON.stringify( this.ranking ) ) );
     console.log( '---------- ---------- \n\n\n' );
 
     //need to send this.output to DB
 
-		this.router.navigate('step_4');
+		this.router.navigate('step_6');
 	}
 }

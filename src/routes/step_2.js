@@ -5,16 +5,17 @@ import DataStore from '../services/data-store.js';
 import LuzzuApiService from '../services/luzzu-api-service.js';
 import MongoStitchApiService from '../services/mongo-stitch-api-service.js';
 import SinglePass from '../services/single-pass.js';
+import RankingConverter from '../services/ranking-converter.js';
 
 
 import stepDescription from 'raw-loader!../../static/content/step-2-description.txt';
 
 
-@inject(Router, DataStore, LuzzuApiService, MongoStitchApiService, SinglePass)
+@inject(Router, DataStore, LuzzuApiService, MongoStitchApiService, SinglePass, RankingConverter)
 
 export class Step_1 {
 	
-	constructor(Router, DataStore, LuzzuApiService, MongoStitchApiService, SinglePass) {
+	constructor(Router, DataStore, LuzzuApiService, MongoStitchApiService, SinglePass, RankingConverter) {
 		this.router = Router;
 		this.consent_checked = false;
 		this.loading = true;
@@ -22,7 +23,8 @@ export class Step_1 {
 		this.mongoStitchApiService = MongoStitchApiService;
 		this.luzzuApiService = LuzzuApiService;
 		this.dataStore = DataStore;
-		this.singlePass = SinglePass;
+    this.singlePass = SinglePass;
+    this.rankingConverter = RankingConverter;
 
     this.stepDescription = stepDescription;
     
@@ -56,7 +58,8 @@ export class Step_1 {
     let p2 = new Promise( (resolve, reject) => {
       this.luzzuApiService.getRanking()
         .then( (rankingData) => {
-          this.dataStore.setRanking( rankingData );
+          let converted = this.rankingConverter.convertIncomming( rankingData );
+          this.dataStore.setRanking( converted );
           resolve();
         });
     });

@@ -1,41 +1,35 @@
-import { inject } from 'aurelia-framework';
 import * as d3 from 'd3';
-
-//@inject(HttpClient)
 
 export default class RankingConverter {
   
   convertIncomming( dimensions ) {
+    console.log('\n\n\nConverting Incomming');
 
-    for ( let dimension of dimensions ) {
-      dimension.value = dimension.apiValue * 100
-    }
-  }
+    dimensions = JSON.parse( JSON.stringify( dimensions ) );
 
-  convertOutgoing( dimensions ) {
-
-    for( let dimension of dimensions ) {
-      dimension.apiValue = dimension.value / 100;
-    }
-  }
-}
-
-/*
-BACK UP FROM PREVIOUS VERSION
-convertIncomming( dimensions ) {
-
-    let max = d3.max( dimensions.map( el => { return el.apiValue; } ) );
+    let max = d3.max( dimensions.map( el => { return el.value; } ) );
 
     let scale = d3.scaleLinear()
       .domain([0, max])
       .range([0, 100]);
 
     for ( let dimension of dimensions ) {
-      dimension.value = scale(dimension.apiValue)
+      let oldValue = dimension.value
+      let newValue = scale(dimension.value)
+      
+      console.log( dimension.name, 'converted value from', oldValue, 'to', newValue );
+      
+      dimension.value = newValue;
     }
+    console.log('\n\n\n');
+
+    return dimensions;
   }
 
   convertOutgoing( dimensions ) {
+    console.log('\n\n\nConverting Outgoing');
+
+    dimensions = JSON.parse( JSON.stringify( dimensions ) );
 
     let total = dimensions.reduce( (total, el) => {
       return total + parseFloat(el.value);
@@ -46,7 +40,21 @@ convertIncomming( dimensions ) {
       .range([0, 1]);
 
     for( let dimension of dimensions ) {
-      dimension.apiValue = scale( dimension.value );
+      let oldValue = dimension.value
+      let newValue = scale(dimension.value)
+
+      console.log( dimension.name, 'converted value from', oldValue, 'to', newValue );
+
+      dimension.value = newValue;
     }
+
+    console.log('\n\n\n');
+
+    return dimensions;
   }
+}
+
+/*
+BACK UP FROM PREVIOUS VERSION
+c
 */

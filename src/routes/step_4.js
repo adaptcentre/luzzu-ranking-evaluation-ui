@@ -5,19 +5,21 @@ import DataStore from '../services/data-store.js';
 import LuzzuApiService from '../services/luzzu-api-service.js';
 import MongoStitchApiService from '../services/mongo-stitch-api-service.js';
 import SinglePass from '../services/single-pass.js';
+import RankingConverter from '../services/ranking-converter.js';
 
 import stepDescription from 'raw-loader!../../static/content/step-4-description.txt';
 
-@inject(Router, LuzzuApiService, MongoStitchApiService, DataStore, SinglePass)
+@inject(Router, LuzzuApiService, MongoStitchApiService, DataStore, SinglePass, RankingConverter)
 
 export default class Step_4 {
-  constructor(Router, LuzzuApiService, MongoStitchApiService, DataStore, SinglePass) {
+  constructor(Router, LuzzuApiService, MongoStitchApiService, DataStore, SinglePass, RankingConverter) {
     
     this.mainRouter = Router;
     this.luzzuApiService = LuzzuApiService;
     this.mongoStitchApiService = MongoStitchApiService;
     this.dataStore = DataStore;
     this.singlePass = SinglePass;
+    this.rankingConverter = RankingConverter;
     
     this.loading = true;
 
@@ -37,6 +39,7 @@ export default class Step_4 {
     this.singlePass.add('step_4');
 
     this.userSelectedDimensions = this.dataStore.getUserSelectedDimensions();
+    this.userSelectedDimensions = this.rankingConverter.convertOutgoing( this.userSelectedDimensions );
 
     let requestObj = this.dataStore.createResultRequestObject( this.userSelectedDimensions );
     
