@@ -10,6 +10,8 @@ export default class DataStore {
     this.ranking = [];
     this.dimensions = [];
     this.userSelectedDimensions = [];
+
+    this.userData = {};
   }
 
   clone(obj) {
@@ -93,35 +95,11 @@ export default class DataStore {
 
 
   //--------
-
-  setParticipantId( id ) {
-    this.userData.id = id;
-  }
-
-  updateStep(step, time) {
-    this.userData[step].time = time;
-  }
-
-  addQuestion( step, question ) {
-    this.userData[step].question = question;
-  }
-
-  addRanking(step, ranking) {
-    this.userData[step].ranking = ranking;
-  }
-
-  changedSubView(step, data) {
-    this.userData[step].views.push( data );
+  addDataToUserData(step, data) {
+    this.userData[step] = data;
   }
 
   getUserData() {
-    return JSON.parse( JSON.stringify( this.userData ) );
-  }
-
-  setUserDataTimeStart() {
-    this.userData.time.start = Date.now();
-  }
-  setUserDataTimeEnd() {
-    this.userData.time.end = Date.now();
+    return this.clone( this.userData );
   }
 }

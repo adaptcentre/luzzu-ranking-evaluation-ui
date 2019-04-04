@@ -3,20 +3,18 @@ import {PLATFORM} from 'aurelia-pal';
 import {Router} from 'aurelia-router';
 import DataStore from '../services/data-store.js';
 import LuzzuApiService from '../services/luzzu-api-service.js';
-import MongoStitchApiService from '../services/mongo-stitch-api-service.js';
 import SinglePass from '../services/single-pass.js';
 import RankingConverter from '../services/ranking-converter.js';
 
-import stepDescription from 'raw-loader!../../static/content/step-4-description.txt';
+import stepDescription from 'raw-loader!../content/step-4-description.txt';
 
-@inject(Router, LuzzuApiService, MongoStitchApiService, DataStore, SinglePass, RankingConverter)
+@inject(Router, LuzzuApiService, DataStore, SinglePass, RankingConverter)
 
 export default class Step_4 {
-  constructor(Router, LuzzuApiService, MongoStitchApiService, DataStore, SinglePass, RankingConverter) {
+  constructor(Router, LuzzuApiService, DataStore, SinglePass, RankingConverter) {
     
     this.mainRouter = Router;
     this.luzzuApiService = LuzzuApiService;
-    this.mongoStitchApiService = MongoStitchApiService;
     this.dataStore = DataStore;
     this.singlePass = SinglePass;
     this.rankingConverter = RankingConverter;
@@ -68,12 +66,17 @@ export default class Step_4 {
     this.loading = true;
     
     //save selected datasets in DB
-    let output = JSON.parse( JSON.stringify( this.results ) );
+    let output = this.dataStore.clone(  this.results ).map( (el) => {
+      //Dataset-PLD, Rank-Value, Graph-URI, Title, Description, Website, selected
+      return { 'Rank-Value': el['Rank-Value'], Title: el.Title, Selected: el.selected, 'Dataset-PLD': el['Dataset-PLD'] };
+    });
 
     console.log( '\n\n\n ---------- ----------' );
     console.log( 'Proceeding to next step (step 3 -> step 4)' );
-    console.table( JSON.parse( JSON.stringify( output ) ) );
+    console.table( output );
     console.log( '---------- ---------- \n\n\n' );
+
+    this.dataStore.addDataToUserData('step_4', output );
     
     this.mainRouter.navigate('step_5');
   }

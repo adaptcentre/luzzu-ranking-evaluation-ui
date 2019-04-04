@@ -3,22 +3,20 @@ import {Router} from 'aurelia-router';
 
 import DataStore from '../services/data-store.js';
 import LuzzuApiService from '../services/luzzu-api-service.js';
-import MongoStitchApiService from '../services/mongo-stitch-api-service.js';
 import SinglePass from '../services/single-pass.js';
 
 
-import stepDescription from 'raw-loader!../../static/content/step-3-description.txt';
+import stepDescription from 'raw-loader!../content/step-3-description.txt';
 
 
-@inject(Router, DataStore, LuzzuApiService, MongoStitchApiService, SinglePass)
+@inject(Router, DataStore, LuzzuApiService, SinglePass)
 
 export class Step_3 {
 	
-	constructor(Router, DataStore, LuzzuApiService, MongoStitchApiService, SinglePass) {
+	constructor(Router, DataStore, LuzzuApiService, SinglePass) {
 		this.router = Router;
-		this.loading = true;
-
-		this.mongoStitchApiService = MongoStitchApiService;
+    this.loading = true;
+    
 		this.luzzuApiService = LuzzuApiService;
 		this.dataStore = DataStore;
 		this.singlePass = SinglePass;
@@ -52,10 +50,15 @@ export class Step_3 {
     
     console.log( '\n\n\n ---------- ----------' );
     console.log( 'Proceeding to next step (step 3 -> step 4)' );
-    console.table( JSON.parse( JSON.stringify( this.userSelectedDimensions ) ) );
+    console.table( this.dataStore.clone( this.userSelectedDimensions ) );
     console.log( '---------- ---------- \n\n\n' );
 
-    //need to send this.output to DB
+    let result = this.dataStore.clone( this.userSelectedDimensions ).map( (el) => {
+      //name, desc, suggested, selected, value
+      return { name: el.name, value: el.value, selected: el.selected };
+    });
+
+    this.dataStore.addDataToUserData('step_3', result );
 
 		this.router.navigate('step_4');
 	}

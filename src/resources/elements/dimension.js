@@ -24,7 +24,6 @@ export class Dimension {
       disable: this.readonly,
       onFinish: (data) => {
         this.dimension.value = data.from;
-        this.change();
       }
     });
 

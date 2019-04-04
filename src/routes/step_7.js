@@ -1,5 +1,6 @@
 import { inject } from 'aurelia-framework';
 import {Router} from 'aurelia-router';
+
 import SinglePass from '../services/single-pass.js';
 
 @inject(Router, SinglePass)
