@@ -5,6 +5,11 @@ import '@fortawesome/fontawesome-free/js/all'
 import 'app.css';
 
 export class App {
+
+	constructor() {
+		//turn off console logging - not sure if a good idea
+		console.log = function() {}
+	}
   
   configureRouter(config, router) {
 		this.router = router;
