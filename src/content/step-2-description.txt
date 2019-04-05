@@ -1,5 +1,11 @@
-<h1> Step 2 description </h1>
+<h1> Evaluation Task 1: Identifying the quality measures </h1>
+
+<p style="border-style: solid">
+<strong>You are creating bibliographic metadata, in a Linked Data format, for items your digital library. As per Linked Data principles, you require to link your metadata with other bibliographic datasets and/or controlled vocabularies.</strong>
+</p>
 
 <p>
-  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Beatae sint earum possimus commodi aut quaerat fuga, nostrum asperiores iste quia atque quod officiis, incidunt repellat culpa libero aperiam neque sequi! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Beatae sint earum possimus commodi aut quaerat fuga, nostrum asperiores iste quia atque quod officiis, incidunt repellat culpa libero aperiam neque sequi!
+The data portal you are using allows for ranking and retrieval based on quality measures. Based on the task you are doing, the portal pre-suggested three quality measures, Interoperability, Licensing, and Trustworthiness (highlighted in red). 
+<br />
+Please select (click on) the quality measures that are you think are the most important for a ranked dataset to have.
 </p>
