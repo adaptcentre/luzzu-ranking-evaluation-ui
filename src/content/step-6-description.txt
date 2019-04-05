@@ -1,5 +1,8 @@
-<h1> Step 6 description </h1>
+<h1> Evaluation Task 3: Ranking datasets using the suggested quality measures</h1>
+
+<p style="border-style: solid">
+<strong>You are creating bibliographic metadata, in a Linked Data format, for items your digital library. As per Linked Data principles, you require to link your metadata with other bibliographic datasets and/or controlled vocabularies.</strong>
 
 <p>
-  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Beatae sint earum possimus commodi aut quaerat fuga, nostrum asperiores iste quia atque quod officiis, incidunt repellat culpa libero aperiam neque sequi! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Beatae sint earum possimus commodi aut quaerat fuga, nostrum asperiores iste quia atque quod officiis, incidunt repellat culpa libero aperiam neque sequi!
+Please click on the datasets that you think are relevant for your metadata task and then click next.
 </p>
