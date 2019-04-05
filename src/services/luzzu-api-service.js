@@ -112,8 +112,14 @@ export default class LuzzuApiService {
             continue;
           }
 
+          let name = dimension.Label;
+
+          if(name === 'Syntactic Validity') {
+            name = 'Syntactic validity';
+          }
+
           output.push({
-            name: dimension.Label,
+            name: name,
             desc: dimension.Comment,
             uri: dimension.URI,
             value: 0,
