@@ -59,7 +59,7 @@ export class Step_5 {
 
     let result = this.dataStore.clone( this.ranking ).map( (el) => {
       //name, desc, suggested, selected, value
-      return { name: el.name, value: el.value, selected: el.selected };
+      return { name: el.name, value: el.value, apiValue: el.apiValue, selected: el.selected };
     });
 
     this.dataStore.addDataToUserData('step_5', result );

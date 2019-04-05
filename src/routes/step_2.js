@@ -80,7 +80,8 @@ export class Step_1 {
         desc: dimension.desc, 
         suggested: false,
         selected: false,
-        value: 0
+        value: 0,
+        apiValue: 0
       };
 
       let isInRanking = this.ranking.find( (ranking) => {
@@ -90,6 +91,7 @@ export class Step_1 {
       if( isInRanking ) {
         dim.suggested = true;
         dim.value = isInRanking.value;
+        dim.apiValue = isInRanking.apiValue;
       }
 
       return dim;
@@ -118,7 +120,7 @@ export class Step_1 {
 
     let result = this.dataStore.clone( this.output ).map( (el) => {
       //name, desc, suggested, selected, value
-      return { name: el.name, value: el.value, selected: el.selected };
+      return { name: el.name, value: el.value, apiValue: el.apiValue, selected: el.selected };
     });
 
     this.dataStore.addDataToUserData('step_2', result);

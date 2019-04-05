@@ -55,20 +55,16 @@ export class Step_3 {
     console.table( this.dataStore.clone( this.userSelectedDimensions ) );
     console.log( '---------- ---------- \n\n\n' );
 
-    let result = this.dataStore.clone( this.userSelectedDimensions ).map( (el) => {
+  
+    let convertedRankings = this.rankingConverter.convertOutgoing( this.userSelectedDimensions );
+    let resObj = this.dataStore.createUpdateRankingObj(convertedRankings);
+
+    let result = this.dataStore.clone( convertedRankings ).map( (el) => {
       //name, desc, suggested, selected, value
-      return { name: el.name, value: el.value, selected: el.selected };
+      return { name: el.name, value: el.value, apiValue: el.apiValue, selected: el.selected };
     });
 
     this.dataStore.addDataToUserData('step_3', result );
-
-    //create obj to send to luzzu api
-    /*
-      
-    */
-
-    let convertedRankings = this.rankingConverter.convertOutgoing( this.userSelectedDimensions );
-    let resObj = this.dataStore.createUpdateRankingObj(convertedRankings);
 
     this.luzzuApiService.updateRanking(resObj)
     .then( () => {
