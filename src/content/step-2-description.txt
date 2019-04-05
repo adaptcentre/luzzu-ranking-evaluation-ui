@@ -7,5 +7,5 @@
 <p>
 The data portal you are using allows for ranking and retrieval based on quality measures. Based on the task you are doing, the portal pre-suggested three quality measures, Interoperability, Licensing, and Trustworthiness (highlighted in red). 
 <br />
-Please select (click on) the quality measures that are you think are the most important for a ranked dataset to have.
+Please select (click on) the quality measures that are you think are the most important for a ranked dataset to have. Once done, click the Next button.
 </p>
