@@ -11,7 +11,9 @@ export default class DataStore {
     this.dimensions = [];
     this.userSelectedDimensions = [];
 
-    this.userData = {};
+    this.userData = {
+      time: Date.now()
+    };
   }
 
   clone(obj) {
