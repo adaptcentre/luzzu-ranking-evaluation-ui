@@ -7,15 +7,15 @@ export default class RankingConverter {
 
     dimensions = JSON.parse( JSON.stringify( dimensions ) );
 
-    let max = d3.max( dimensions.map( el => { return el.value; } ) );
+    let max = d3.max( dimensions.map( el => { return el.apiValue; } ) );
 
     let scale = d3.scaleLinear()
       .domain([0, max])
       .range([0, 100]);
 
     for ( let dimension of dimensions ) {
-      let oldValue = dimension.value
-      let newValue = scale(dimension.value)
+      let oldValue = dimension.apiValue
+      let newValue = scale(dimension.apiValue)
       
       console.log( dimension.name, 'converted value from', oldValue, 'to', newValue );
       
@@ -45,7 +45,7 @@ export default class RankingConverter {
 
       console.log( dimension.name, 'converted value from', oldValue, 'to', newValue );
 
-      dimension.value = newValue;
+      dimension.apiValue = newValue;
     }
 
     console.log('\n\n\n');

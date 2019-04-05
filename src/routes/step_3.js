@@ -4,22 +4,24 @@ import {Router} from 'aurelia-router';
 import DataStore from '../services/data-store.js';
 import LuzzuApiService from '../services/luzzu-api-service.js';
 import SinglePass from '../services/single-pass.js';
+import RankingConverter from '../services/ranking-converter.js';
 
 
 import stepDescription from 'raw-loader!../content/step-3-description.txt';
 
 
-@inject(Router, DataStore, LuzzuApiService, SinglePass)
+@inject(Router, DataStore, LuzzuApiService, SinglePass, RankingConverter)
 
 export class Step_3 {
 	
-	constructor(Router, DataStore, LuzzuApiService, SinglePass) {
+	constructor(Router, DataStore, LuzzuApiService, SinglePass, RankingConverter) {
 		this.router = Router;
     this.loading = true;
     
 		this.luzzuApiService = LuzzuApiService;
 		this.dataStore = DataStore;
 		this.singlePass = SinglePass;
+    this.rankingConverter = RankingConverter;
 
     this.stepDescription = stepDescription;
     
@@ -60,6 +62,17 @@ export class Step_3 {
 
     this.dataStore.addDataToUserData('step_3', result );
 
-		this.router.navigate('step_4');
+    //create obj to send to luzzu api
+    /*
+      
+    */
+
+    let convertedRankings = this.rankingConverter.convertOutgoing( this.userSelectedDimensions );
+    let resObj = this.dataStore.createUpdateRankingObj(convertedRankings);
+
+    this.luzzuApiService.updateRanking(resObj)
+    .then( () => {
+      this.router.navigate('step_4');
+    });
 	}
 }

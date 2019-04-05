@@ -59,6 +59,41 @@ export default class DataStore {
     return this.clone( this.userSelectedDimensions );
   }
 
+  createUpdateRankingObj( ranking ) {
+    /*
+      {
+      “Accuracy”: 0.0,
+      “Availability”: 0.2797,
+      “Completeness”: 0.0,
+      “Conciseness”: 0.4265,
+      “Consistency”: 0.2938,
+      “Documentation”: 0.0,
+      “Interoperability”: 0.0,
+      “Licensing”: 0.0,
+      “Longevity”: 0.0,
+      “Provenance”: 0.0,
+      “Relevance”: 0.0,
+      “Syntactic validity”: 0.0,
+      “Timeliness”: 0.0,
+      “Trustworthiness”: 0.0,
+      “Understandability”: 0.0,
+      “Versatility”: 0.0
+      }
+    */
+
+    let res = {};
+
+    for(let dim of this.dimensions) {
+      res[dim.name] = 0.0;
+    }
+
+    for( let rank of ranking ) {
+      res[rank.name] = rank.apiValue;
+    }
+
+    return res;
+  }
+
   createResultRequestObject( ranking ) {
     
     ranking = ranking || this.ranking;
@@ -69,7 +104,7 @@ export default class DataStore {
       result.push({
         type: 'dimension',
         uri: this.getDimensionURI( dimension.name ),
-        weight: dimension.value.toString()
+        weight: dimension.apiValue.toString()
       });
     }
 

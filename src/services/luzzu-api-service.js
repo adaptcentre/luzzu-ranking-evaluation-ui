@@ -48,7 +48,7 @@ export default class LuzzuApiService {
       let output = [];
 
       for(let [key, value] of Object.entries(data) ) {
-        output.push( { name: key, value: value } );
+        output.push( { name: key, apiValue: value, value: 0 } );
       }
       console.log('\n---------------');
       console.log('Got ranking from API');
@@ -61,6 +61,31 @@ export default class LuzzuApiService {
       console.log( err );
       return [];
     });
+  }
+
+  updateRanking( requestObj ) {
+    //http://irc-eval.adaptcentre.ie/recommender/update_measures
+    //POST
+
+    let endpoint = 'recommender/update_measures';
+
+    console.log('Sending Request obj to API to update rankings');
+    console.table(requestObj);
+        
+    return this.httpClient.fetch(endpoint, { 
+      method: 'post',
+      body: json( requestObj ) 
+    })
+    .then( (response) => {
+      return response.json();
+    })
+    .then( (data) => {
+      return data;
+    })
+    .catch( (err) => {
+      console.log( err );
+    });
+
   }
 
   getDimensions() {
@@ -90,7 +115,9 @@ export default class LuzzuApiService {
           output.push({
             name: dimension.Label,
             desc: dimension.Comment,
-            uri: dimension.URI
+            uri: dimension.URI,
+            value: 0,
+            apiValue: 0
           });
         }
       }
