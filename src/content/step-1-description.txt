@@ -1,5 +1,9 @@
-<h1 class="text-center display-3 mb-3"> Step 1 description </h1>
+<h1 class="text-center display-3 mb-3"> Identifying Task-Dependent Quality Measures </h1>
 
 <p>
-  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Beatae sint earum possimus commodi aut quaerat fuga, nostrum asperiores iste quia atque quod officiis, incidunt repellat culpa libero aperiam neque sequi! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Beatae sint earum possimus commodi aut quaerat fuga, nostrum asperiores iste quia atque quod officiis, incidunt repellat culpa libero aperiam neque sequi!
+Dear participant, thank you for agreeing to evaluate our approach towards automatically identifying task-dependent quality measures. This evaluation has 3 small tasks which should not take more than 10 minutes to complete. These tasks are about identifying key quality indicators for a specific digital library task which will be highlighted shortly. Results from these tasks will be recorded at each step, however, all of these will be anonymised and no personal information is recorded. Please read and agree to the informed consent form before proceeding.
+
+<p>In order to complete the tasks, we present the following scenario:</p>
+<p style="border-style: solid">
+<strong>You are creating Linked Data bibliographic metadata resources for your digital library. As per Linked Data principles you require to interlink your resource with other bibliographic datasets and/or controlled vocabularies.</strong>
 </p>
