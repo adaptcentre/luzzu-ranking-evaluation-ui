@@ -1,9 +1,11 @@
-<h1 class="text-center display-3 mb-3"> Identifying Task-Dependent Quality Measures </h1>
+<h1 class="text-center display-3 mb-4"> Identifying Task-Dependent Quality Measures </h1>
 
 <p>
 Dear participant, thank you for agreeing to evaluate our approach towards automatically identifying task-dependent quality measures. This evaluation has 3 evaluation tasks which should not take more than 10 minutes to complete. These tasks are about identifying key quality indicators for a specific digital library task which will be highlighted shortly. Results from these tasks will be recorded at each step, however, all of these will be anonymised and no personal information is recorded. Please read and agree to the informed consent form before proceeding.
 
 <p>In order to complete the evaluation tasks, we present the following scenario:</p>
-<p style="border-style: solid">
-<strong>You are creating bibliographic metadata, in a Linked Data format, for items your digital library. As per Linked Data principles, you require to link your metadata with other bibliographic datasets and/or controlled vocabularies.</strong>
+<p style="border-style: solid" class="px-2 py-2">
+  <strong>
+    You are creating bibliographic metadata, in a Linked Data format, for items your digital library. As per Linked Data principles, you require to link your metadata with other bibliographic datasets and/or controlled vocabularies.
+  </strong>
 </p>

@@ -1,6 +1,6 @@
 <h1> Evaluation Task 3: Ranking datasets using the suggested quality measures</h1>
 
-<p style="border-style: solid">
+<p style="border-style: solid" class="px-2 py-2">
 <strong>You are creating bibliographic metadata, in a Linked Data format, for items your digital library. As per Linked Data principles, you require to link your metadata with other bibliographic datasets and/or controlled vocabularies.</strong>
 
 <p>
