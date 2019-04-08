@@ -8,7 +8,13 @@ export class App {
 
 	constructor() {
 		//turn off console logging - not sure if a good idea
-		//console.log = function() {}
+		
+		let debug = false;
+		
+		if(!debug) {
+			console.log = function() {}
+			console.table = function() {}
+		}
 	}
   
   configureRouter(config, router) {
