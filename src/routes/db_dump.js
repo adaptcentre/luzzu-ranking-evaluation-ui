@@ -8,6 +8,21 @@ export class DbDump {
   constructor(MongoStitchApiService) {
     this.mongoStitchApiService = MongoStitchApiService;
     this.loading = true;
+    this.results = [];
+  }
+
+  activate() {
+
+    let p1 = new Promise( (resolve, reject) => {
+      this.mongoStitchApiService.getEverything()
+      .then( (results) => {
+        this.results = results;
+        console.log(results);
+        resolve();
+      });
+    });
+    
+    return p1;
   }
 
   attached() {
@@ -17,21 +32,14 @@ export class DbDump {
   createDumpFile() {
     this.loading = true;
 
-    console.log('getting data from server');
-
-    this.mongoStitchApiService.getEverything()
-    .then( (results) => {
-
-      let blob = new Blob( [JSON.stringify(results, null, '\t')] , {
-          type: "application/json;charset=utf-8;",
-      });
-      
-      FileSaver.saveAs(blob, 'luzzu_evaluation_db_dump_' + Date.now().toString() + '.json');
-
-      this.loading = false;
-      console.log(results);
+    let blob = new Blob( [JSON.stringify(results, null, '\t')] , {
+      type: "application/json;charset=utf-8;",
     });
+      
+    FileSaver.saveAs(blob, 'luzzu_evaluation_db_dump_' + Date.now().toString() + '.json');
 
+     this.loading = false;
+     console.log(results);
   }
 
 }

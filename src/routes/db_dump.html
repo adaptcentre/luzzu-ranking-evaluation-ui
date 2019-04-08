@@ -10,21 +10,31 @@
         </h1>
 			</div>
     </div>
+
+    <div class="row mt-3">
+      <div class="col-12">
+        <p class="text-center">
+          Currenlty ${results.length} participant(s) have completed the evaluation.
+        </p>
+      </div>
+    </div>
     
     <div class="row mt-5">
-        <div class="col-6 offset-3">
-          <button type="button" class="btn btn-block btn-primary btn-lg text-center" click.delegate="createDumpFile()">
-            <span if.bind="loading">
-               <h1>
-                  <i class="fa-circle-o-notch spinner"></i>
-                </h1>
-            </span>
-            <span else>
-              Create DB DUMP FILE 
-            </span>
-          </button>
-        </div>
+      <div class="col-6 offset-3">
+        <button type="button" class="btn btn-block btn-primary btn-lg text-center" click.delegate="createDumpFile()">
+          <span if.bind="loading">
+              <h1>
+                <i class="fa-circle-o-notch spinner"></i>
+              </h1>
+          </span>
+          <span else>
+            Create DB DUMP FILE 
+          </span>
+        </button>
       </div>
+    </div>
 
-	</div>
+  </div>
+  
+
 </template>
