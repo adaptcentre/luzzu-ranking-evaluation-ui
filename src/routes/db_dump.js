@@ -17,7 +17,6 @@ export class DbDump {
       this.mongoStitchApiService.getEverything()
       .then( (results) => {
         this.results = results;
-        console.log(results);
         resolve();
       });
     });
@@ -32,14 +31,14 @@ export class DbDump {
   createDumpFile() {
     this.loading = true;
 
-    let blob = new Blob( [JSON.stringify(results, null, '\t')] , {
+    let blob = new Blob( [JSON.stringify(this.results, null, '\t')] , {
       type: "application/json;charset=utf-8;",
     });
       
     FileSaver.saveAs(blob, 'luzzu_evaluation_db_dump_' + Date.now().toString() + '.json');
 
-     this.loading = false;
-     console.log(results);
+    this.loading = false;
+    console.log(this.results);
   }
 
 }
