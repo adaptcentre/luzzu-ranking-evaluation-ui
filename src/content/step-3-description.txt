@@ -5,5 +5,5 @@
 </p>
 
 <p>
-Please give each quality measure an importance weight. The suggested quality measures: Interoperability, Licensing, and Trustworthiness are given an importance weight, however, you can also change that. Once done, click on the Rank button.
+Please give each quality measure an importance weight by moving the slider to the desired value. The suggested quality measures: Interoperability, Licensing, and Trustworthiness, are already given an importance weight, however, you can also change that by moving their sliders. Once done, click on the Rank button.
 </p>
