@@ -66,9 +66,10 @@ export class Step_3 {
 
     this.dataStore.addDataToUserData('step_3', result );
 
-    this.luzzuApiService.updateRanking(resObj)
-    .then( () => {
-      this.router.navigate('step_4');
-    });
+    this.router.navigate('step_4');
+    //this.luzzuApiService.updateRanking(resObj)
+    //.then( () => {
+    //  this.router.navigate('step_4');
+    //});
 	}
 }
