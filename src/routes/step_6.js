@@ -65,6 +65,10 @@ export default class Step_4 {
     this.results = this.results.slice(0, 6);
   }
 
+  withdraw(){
+    this.mainRouter.navigate('withdraw');
+  }
+  
   next() {
     this.loading = true;
     

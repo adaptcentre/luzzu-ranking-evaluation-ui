@@ -1,9 +1,64 @@
 <div class="card-header">
    <h2 class="text-center">
-      Trinity College Dublin - Informed Consent Form
+      Trinity College Dublin - Participant Information Sheet and Informed Consent Form
    </h2>
 </div>
 <div class="card-body">
+<h3>Participant Information Sheet</h3>
+<h1>Identifying Task-Dependent Quality Measures</h1>
+<h3>1.&nbsp;&nbsp;&nbsp;&nbsp; Lead Researcher and Contact Details</h3>
+<p>Dr. Jeremy Debattista (<a href="mailto:judie.attard@adaptcentre.ie">debattij@scss.tcd.ie</a>)</p>
+<h3>2.&nbsp;&nbsp;&nbsp;&nbsp; Background of Research</h3>
+<p>This experiment is focused on gaining insight on the various data quality considerations that are taken during data source selection for a digital library task. The goal is to determine whether the suggested quality measures will help participants find the right dataset based on their quality. Our research aims to validate a statistical model that identifies the key quality indicators for specific tasks. This evaluation is targeted towards library scientists (e.g. librarians, digital library metadata maintainers etc&hellip;).</p>
+<h3>3.&nbsp;&nbsp;&nbsp;&nbsp; Procedures</h3>
+<p>In this experiment we will present the participant with three tasks. In the first task, the participant is asked to choose the quality measures that are important for a metadata creation task, followed by the identification of importance weights of the selected measures. These selected measures and weights are passed to our algorithm as feedback. These selections are also saved in a backend database in order to calculate the precision and recall of our model. Based on the participant choices, the second task consists of the participant identifying ranked datasets relevant to the task. The chosen datasets will also be stored in a backend database for evaluation purposes. The final task is similar to the second task, however, the ranking of the datasets is based on the model&rsquo;s suggested quality measures. Here, participants&rsquo; identification of relevant datasets will also be saved in the backend database. This experiment would take a maximum of 10 minutes to complete and should be taken all at once rather than broken into segments. All participants will remain completely anonymous and no personal information is required or will be recorded. There are no particular risks to participating in this experiment beyond those inherent using any internet-based computer application.</p>
+<h3>4.&nbsp;&nbsp;&nbsp;&nbsp; Expected Duration of Involvement</h3>
+<p>We expect that this evaluation would take a maximum of 10 minutes to complete and should be taken all at once rather than broken into segments. Each participant can repeat the evaluation a number of times, however, this is not encouraged.</p>
+<h3>5.&nbsp;&nbsp;&nbsp;&nbsp; Participants Background</h3>
+<p>Due to the nature of the selected use case evaluation task, we are seeking participants working in the library science domain.</p>
+<h3>6.&nbsp;&nbsp;&nbsp;&nbsp; Selection of Candidates for this Study</h3>
+<p>The primary members of this study will be selected by email distribution individual librarians and library scientists working in different institutions, asking for their permission and assistance to re-distribute amongst their colleagues.</p>
+<h3>7.&nbsp;&nbsp;&nbsp;&nbsp; Declaration of Conflict of Interest</h3>
+<p>This study is being undertaken to make progress in my research and the research of the other team members. Thus, if you are a work colleague, friend or acquaintance of any member of the research team we wish to highlight that we are taking advantage of our existing relationships in order to make progress in our research.</p>
+<h3>8.&nbsp;&nbsp;&nbsp;&nbsp; Voluntary Participation and Withdrawal</h3>
+<p>Your participation is entirely voluntary, and you can withdraw at any time up until the end of the survey. As there is no way for us (or anyone else) to identify an individual participant at any time of the evaluation. An incomplete evaluation would mean that the participant withdrawn his participation and the information submitted up to that time will not be considered and removed. &nbsp;It will no longer be possible to withdraw once you have submitted the evaluation.</p>
+<h3>9.&nbsp;&nbsp;&nbsp;&nbsp; Anticipated Risks/Benefits to the Participant</h3>
+<p>There are no particular risks to participating in this experiment beyond those inherent using any internet-based computer application.</p>
+<h3>10.&nbsp; Provisions for Debriefing after Participation</h3>
+<p>After participation, participants are entitled to email the lead researcher, Jeremy Debattista, for an update on the progress of the research and to request copies of any publications based on the research.</p>
+<h3>11.&nbsp; Preservation of Anonymity</h3>
+<p>All participants and third-parties involved in the research will retain anonymity in analysis, publication and presentation of resulting data and findings.</p>
+<h3>12.&nbsp; Optional Nature of Tasks</h3>
+<p>As the purpose of the tasks is to identify the accuracy and relevance of the model, these build on each other. Therefore, a completion of the participation requires the completion of all three tasks, however, the participant can withdraw at any time without penalty.</p>
+<h3>13.&nbsp; Inadvertent Discovery of Illicit Activities</h3>
+<p>Participants are warned that in the extremely unlikely event that illicit activity is reported, the lead researcher will be obliged to report it to appropriate authorities.</p>
+<h3>14.&nbsp; Provision for Verifying Direct Quotations and Context</h3>
+<p>No quotations will be collected in the course of this study.</p>
+<h3>15.&nbsp; Audio or Video Recordings</h3>
+<p>No audio or video recordings will be made of participants in this study.</p>
+<h3>16.&nbsp; Data Storage and Security</h3>
+<p>All data will be stored in compliance with EU, national, and institutional regulations and legislation. No information will be shared with any other party without the prior express permission of the user. Sensitive information will be stored in an encrypted form, and all data will be protected by password access. No personal or sensitive data will be collected without prior justification.</p>
+<h3>17.&nbsp; Declaration</h3>
+<p>This work is conducted under the declarations of the TCD School of Computer Science and Statistics Research Ethical Application Form process. This means that the researcher, Jeremy Debattista, has agreed that they will:</p>
+<ul>
+<li>Familiarize myself with the Data Protection Act and the College Good Research Practice guidelines (http://www.tcd.ie/info_compliance/dp/legislation.php);</li>
+<li>Provide participants with an information sheet (or web-page for web-based experiments) that describes the main procedures</li>
+<li>Obtain informed consent for participation</li>
+<li>Tell participants that their participation is voluntary</li>
+<li>Tell participants that they may withdraw at any time and for any reason without penalty</li>
+<li>Give participants the option of omitting questions they do not wish to answer if a questionnaire is used</li>
+<li>Tell participants that their data will be treated with full confidentiality and that, if published, it will not be identified as theirs</li>
+<li>On request, debrief participants at the end of their participation (i.e. give them a brief explanation of the study)</li>
+<li>Verify that participants are 18 years or older and competent to supply consent.</li>
+<li>If the study involves participants viewing video displays then I will verify that they understand that if they or anyone in their family has a history of epilepsy then the participant is proceeding at their own risk</li>
+<li>Declare any potential conflict of interest to participants.</li>
+<li>Inform participants that in the extremely unlikely event that illicit activity is reported to me during the study I will be obliged to report it to appropriate authorities.</li>
+<li>Act in accordance with the information provided (i.e. if I tell participants I will not do something, then I will not do it).</li>
+</ul>
+
+<hr>
+
+<h3>Informed Consent Form</h3>
    <p class="font-weight-bold">
       Lead Researcher: Dr. Jeremy Debattista (debattij@scss.tcd.ie)
    </p>

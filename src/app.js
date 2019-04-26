@@ -31,6 +31,7 @@ export class App {
 			{ route: 'step_5',   name: 'step_5',    moduleId: PLATFORM.moduleName( 'routes/step_5'),   nav: true },
 			{ route: 'step_6',   name: 'step_6',    moduleId: PLATFORM.moduleName( 'routes/step_6'),   nav: true },
 			{ route: 'step_7',   name: 'step_7',    moduleId: PLATFORM.moduleName( 'routes/step_7'),   nav: true },
+      { route: 'withdraw',   name: 'withdraw',    moduleId: PLATFORM.moduleName( 'routes/withdraw'),   nav: true },
 			{ route: 'db_dump',   name: 'db_dump',    moduleId: PLATFORM.moduleName( 'routes/db_dump') }
 	  ]);
 	}
