@@ -19,7 +19,7 @@
     "d3": "^5.9.1",
     "file-saver": "^2.0.1",
     "ion-rangeslider": "^2.3.0",
-    "jquery": "^3.4.0",
+    "jquery": "^3.5.0",
     "mongodb-stitch-browser-sdk": "^4.3.2",
     "popper.js": "^1.14.7",
     "raw-loader": "^2.0.0"
